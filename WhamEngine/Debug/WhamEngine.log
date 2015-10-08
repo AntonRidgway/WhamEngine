@@ -1,0 +1,90 @@
+﻿Build started 10/8/2015 2:50:37 PM.
+     1>Project "D:\Documents\Visual Studio 2015\Projects\WhamEngine\WhamEngine\WhamEngine.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Yu"stdafx.h" /Fp"Debug\WhamEngine.pch" /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt WhamEngine.cpp
+         WhamEngine.cpp
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Documents\Visual Studio 2015\Projects\WhamEngine\Debug\WhamEngine.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib opengl32.lib glu32.lib freeglut.lib release/assimp.lib BulletCollision_vs2010_debug.lib BulletDynamics_vs2010_debug.lib LinearMath_vs2010_debug.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"D:\Documents\Visual Studio 2015\Projects\WhamEngine\Debug\WhamEngine.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /ENTRY:"mainCRTStartup" /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Documents\Visual Studio 2015\Projects\WhamEngine\Debug\WhamEngine.lib" /MACHINE:X86 Debug\WhamEngine.res
+         Debug\FileSystemMan.obj
+         Debug\ForwardCommand.obj
+         Debug\InputMan.obj
+         Debug\PitchCommand.obj
+         Debug\RightCommand.obj
+         Debug\RollCommand.obj
+         Debug\RotationCommand.obj
+         Debug\ScaleCommand.obj
+         Debug\SetGravityCommand.obj
+         Debug\ShootCommand.obj
+         Debug\TransformationCommand.obj
+         Debug\TranslationCommand.obj
+         Debug\UpCommand.obj
+         Debug\YawCommand.obj
+         Debug\Math.obj
+         Debug\PhysicsMan.obj
+         Debug\RenderMan.obj
+         Debug\LoadedGeometry.obj
+         Debug\Material.obj
+         Debug\ResourceMan.obj
+         Debug\Texture.obj
+         Debug\AnimChannel.obj
+         Debug\AnimClip.obj
+         Debug\Bone.obj
+         Debug\Box.obj
+         Debug\Camera.obj
+         Debug\Clock.obj
+         Debug\Color.obj
+         Debug\Entity.obj
+         Debug\Geometry.obj
+         Debug\Light.obj
+         Debug\Node.obj
+         Debug\Pyramid.obj
+         Debug\Quad.obj
+         Debug\Quadric.obj
+         Debug\SceneGraph.obj
+         Debug\Spatial.obj
+         Debug\StateMan.obj
+         Debug\TriMesh.obj
+         Debug\VertexBoneInfo.obj
+         Debug\stdafx.obj
+         Debug\WhamEngine.obj
+         WhamEngine.vcxproj -> D:\Documents\Visual Studio 2015\Projects\WhamEngine\Debug\WhamEngine.exe
+       PostBuildEvent:
+         xcopy /y "D:\Documents\Visual Studio 2015\Projects\WhamEngine\dlls\*.dll" "D:\Documents\Visual Studio 2015\Projects\WhamEngine\Debug\"
+         xcopy /y "D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\*.*" "D:\Documents\Visual Studio 2015\Projects\WhamEngine\Debug\"
+         :VCEnd
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\dlls\Assimp32.dll
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\dlls\Assimp32d.dll
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\dlls\freeglut.dll
+         3 File(s) copied
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\ball.bmp
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\bball.bmp
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\blank.bmp
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\boblampclean.md5anim
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\boblampclean.md5mesh
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\box.bmp
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\brick.bmp
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\buttonMapping.xml
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\carpet.bmp
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\eyeball.bmp
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\GameData.xml
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\guard1_body.bmp
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\guard1_face.bmp
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\guard1_helmet.bmp
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\iron_grill.bmp
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\mountain.bmp
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\round_grill.bmp
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\Sinbad.3ds
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\sinbad_body.bmp
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\sinbad_cloth.bmp
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\sinbad_sword.bmp
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\sky.bmp
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\TestRoom.xml
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\texture.bmp
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\wall.bmp
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\wallpic.bmp
+         26 File(s) copied
+     1>Done Building Project "D:\Documents\Visual Studio 2015\Projects\WhamEngine\WhamEngine\WhamEngine.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.74

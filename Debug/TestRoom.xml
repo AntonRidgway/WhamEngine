@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<meshes>
+  <sphere>
+    <sphere1>
+      <location>-3,3,0</location>
+      <orientation>0,0,0</orientation>
+    </sphere1>
+    <sphere2>
+      <location>3,3,2</location>
+      <orientation>0,0,0</orientation>
+    </sphere2>
+  </sphere>
+  <quad>
+    <location />
+    <orientation />
+  </quad>
+  <rectangle>
+    <location />
+    <orientation />
+  </rectangle>
+  <pyramid>
+    <location />
+    <orientation />
+  </pyramid>
+</meshes>

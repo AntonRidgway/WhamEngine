@@ -1,0 +1,36 @@
+﻿Build started 10/3/2015 5:22:02 PM.
+     1>Project "D:\Documents\Visual Studio 2015\Projects\WhamEngine\WhamEngine\WhamEngine.vcxproj" on node 2 (Build target(s)).
+     1>Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Documents\Visual Studio 2015\Projects\WhamEngine\Release\WhamEngine.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib opengl32.lib glu32.lib freeglut.lib release/assimp.lib BulletCollision_vs2010.lib BulletDynamics_vs2010.lib LinearMath_vs2010.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"D:\Documents\Visual Studio 2015\Projects\WhamEngine\Release\WhamEngine.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG:incremental /TLBID:1 /ENTRY:"mainCRTStartup" /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Documents\Visual Studio 2015\Projects\WhamEngine\Release\WhamEngine.lib" /MACHINE:X86 /SAFESEH Release\WhamEngine.res
+         Release\AnimChannel.obj
+         Release\AnimClip.obj
+         Release\Bone.obj
+         Release\Geometry.obj
+         Release\LoadedGeometry.obj
+         Release\Material.obj
+         Release\Node.obj
+         Release\ResourceMan.obj
+         Release\Spatial.obj
+         Release\Texture.obj
+         Release\TriMesh.obj
+         Release\VertexBoneInfo.obj
+         Release\stdafx.obj
+         Release\WhamEngine.obj
+         Generating code
+         0 of 5 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+           0 functions were new in current compilation
+           0 functions had inline decision re-evaluated but remain unchanged
+         Finished generating code
+         WhamEngine.vcxproj -> D:\Documents\Visual Studio 2015\Projects\WhamEngine\Release\WhamEngine.exe
+       PostBuildEvent:
+         xcopy /y "D:\Documents\Visual Studio 2015\Projects\WhamEngine\dlls\*.dll" "D:\Documents\Visual Studio 2015\Projects\WhamEngine\Release\"
+         :VCEnd
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\dlls\Assimp32.dll
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\dlls\Assimp32d.dll
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\dlls\freeglut.dll
+         3 File(s) copied
+     1>Done Building Project "D:\Documents\Visual Studio 2015\Projects\WhamEngine\WhamEngine\WhamEngine.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.64
