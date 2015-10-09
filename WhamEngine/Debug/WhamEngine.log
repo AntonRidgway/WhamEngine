@@ -1,8 +1,13 @@
-﻿Build started 10/8/2015 2:50:37 PM.
+﻿Build started 10/8/2015 11:33:12 PM.
      1>Project "D:\Documents\Visual Studio 2015\Projects\WhamEngine\WhamEngine\WhamEngine.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Yu"stdafx.h" /Fp"Debug\WhamEngine.pch" /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt WhamEngine.cpp
-         WhamEngine.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Yu"stdafx.h" /Fp"Debug\WhamEngine.pch" /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt filesys\FileSystemMan.cpp
+         FileSystemMan.cpp
+     1>d:\documents\visual studio 2015\projects\whamengine\whamengine\filesys\filesystemman.cpp(172): warning C4305: 'argument': truncation from 'double' to 'float'
+     1>d:\documents\visual studio 2015\projects\whamengine\whamengine\filesys\filesystemman.cpp(179): warning C4305: 'argument': truncation from 'double' to 'float'
+     1>d:\documents\visual studio 2015\projects\whamengine\whamengine\filesys\filesystemman.cpp(501): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+     1>d:\documents\visual studio 2015\projects\whamengine\whamengine\filesys\filesystemman.cpp(507): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+     1>d:\documents\visual studio 2015\projects\whamengine\whamengine\filesys\filesystemman.cpp(551): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Documents\Visual Studio 2015\Projects\WhamEngine\Debug\WhamEngine.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib opengl32.lib glu32.lib freeglut.lib release/assimp.lib BulletCollision_vs2010_debug.lib BulletDynamics_vs2010_debug.lib LinearMath_vs2010_debug.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"D:\Documents\Visual Studio 2015\Projects\WhamEngine\Debug\WhamEngine.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /ENTRY:"mainCRTStartup" /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Documents\Visual Studio 2015\Projects\WhamEngine\Debug\WhamEngine.lib" /MACHINE:X86 Debug\WhamEngine.res
          Debug\FileSystemMan.obj
@@ -24,7 +29,6 @@
          Debug\RenderMan.obj
          Debug\LoadedGeometry.obj
          Debug\Material.obj
-         Debug\ResourceMan.obj
          Debug\Texture.obj
          Debug\AnimChannel.obj
          Debug\AnimClip.obj
@@ -63,10 +67,8 @@
          D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\boblampclean.md5mesh
          D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\box.bmp
          D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\brick.bmp
-         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\buttonMapping.xml
          D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\carpet.bmp
          D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\eyeball.bmp
-         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\GameData.xml
          D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\guard1_body.bmp
          D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\guard1_face.bmp
          D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\guard1_helmet.bmp
@@ -82,9 +84,9 @@
          D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\texture.bmp
          D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\wall.bmp
          D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\wallpic.bmp
-         26 File(s) copied
+         24 File(s) copied
      1>Done Building Project "D:\Documents\Visual Studio 2015\Projects\WhamEngine\WhamEngine\WhamEngine.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:01.74
+Time Elapsed 00:00:01.93

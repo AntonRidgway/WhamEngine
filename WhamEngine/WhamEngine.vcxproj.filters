@@ -66,9 +66,6 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="resources\ResourceMan.h">
-      <Filter>Header Files\resources</Filter>
-    </ClInclude>
     <ClInclude Include="resources\Texture.h">
       <Filter>Header Files\resources</Filter>
     </ClInclude>
@@ -211,9 +208,6 @@
     </ClCompile>
     <ClCompile Include="WhamEngine.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="resources\ResourceMan.cpp">
-      <Filter>Source Files\resources</Filter>
     </ClCompile>
     <ClCompile Include="resources\Texture.cpp">
       <Filter>Source Files\resources</Filter>

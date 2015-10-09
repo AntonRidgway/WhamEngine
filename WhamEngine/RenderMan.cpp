@@ -64,7 +64,7 @@ void RenderMan::renderScene() {
 	StateMan::getInstance().updateState();
 	updateLights();
 	for (int i = 0; i < sEListLen; i++)
-		sceneEList[i]->draw();
+		sceneEList[i]->render();
 
 	// copy the back buffer into the front buffer
 	glutSwapBuffers();

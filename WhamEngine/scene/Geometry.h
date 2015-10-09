@@ -38,8 +38,7 @@ public:
 	void setTexID( GLuint newID );
 
 	Material* getMeshMat() const;
-
-	void draw();
+	void renderSpecific();
 };
 
 #endif

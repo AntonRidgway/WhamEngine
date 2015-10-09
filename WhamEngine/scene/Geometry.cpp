@@ -78,7 +78,7 @@ Material* Geometry::getMeshMat() const
 	return meshMat;
 }
 
-void Geometry::draw()
+void Geometry::renderSpecific()
 {
 		float shininess [1] = {meshMat->getShininess()};
 
@@ -113,39 +113,5 @@ void Geometry::draw()
 			glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_NEAREST);
 		}
 
-		//make this faster by putting it in this format in the matrix class
-		//the 4x4 matrix to adjust the position and rotation of this geometry
-		Matrix44f rotation = getRotation();
-		float rotMatrix[16] =
-		{
-			rotation.getEntry(0,0), rotation.getEntry(0,1), rotation.getEntry(0,2), 0.0f,
-			rotation.getEntry(1,0), rotation.getEntry(1,1), rotation.getEntry(1,2), 0.0f,
-			rotation.getEntry(2,0), rotation.getEntry(2,1), rotation.getEntry(2,2), 0.0f,
-			0.0f, 0.0f, 0.0f, 1.0f
-		};
-		//float rotMatrix[16] =
-		//{
-		//	rotation.getEntry(0,0), rotation.getEntry(1,0), rotation.getEntry(2,0), 0.0f,
-		//	rotation.getEntry(0,1), rotation.getEntry(1,1), rotation.getEntry(2,1), 0.0f,
-		//	rotation.getEntry(0,2), rotation.getEntry(1,2), rotation.getEntry(2,2), 0.0f,
-		//	0.0f, 0.0f, 0.0f, 1.0f
-		//};
-		Vector3f translation = getTranslation();
-		float transMatrix[16] =
-		{
-			1.0f, 0.0f, 0.0f, 0.0f,
-			0.0f, 1.0f, 0.0f, 0.0f,
-			0.0f, 0.0f, 1.0f, 0.0f,
-			translation.getEntry(0), translation.getEntry(1), translation.getEntry(2), 1.0f
-		};
-
-		// set the model-to-world transformation
-		glMatrixMode(GL_MODELVIEW);
-		glPushMatrix();
-		glMultMatrixf(transMatrix);
-		glMultMatrixf(rotMatrix);
 		glDrawElements(GL_TRIANGLES, getNumIndices(), GL_UNSIGNED_INT, getIndices());
-
-		// restore the previous transformation
-		glPopMatrix();
 }

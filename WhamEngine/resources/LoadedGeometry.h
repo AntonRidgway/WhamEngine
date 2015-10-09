@@ -33,7 +33,7 @@ public:
 	LoadedGeometry(TriMesh** meshesIn, Texture** texturesIn, Material** materialsIn, AnimClip** animationsIn, Bone** bonesIn,
 				   int nMe, int nT, int nMa, int nA, int nB, Matrix44f* gitIn);
 	~LoadedGeometry();
-	void draw();
+	void renderSpecific();
 };
 
 #endif

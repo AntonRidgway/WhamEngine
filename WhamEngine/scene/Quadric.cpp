@@ -37,7 +37,7 @@ QuadricSphere::QuadricSphere(Texture* texIn, Material* matIn, GLfloat x, GLfloat
 QuadricSphere::~QuadricSphere()
 {
 }
-void QuadricSphere::draw()
+void QuadricSphere::renderSpecific()
 {
 	float shininess [1] = {myMat->getShininess()};
 
@@ -65,31 +65,5 @@ void QuadricSphere::draw()
 		glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_NEAREST);
 	}
 	
-	//the 4x4 matrix to adjust the position and rotation of this quadric
-	Matrix44f transformation = getTransformation();
-	Matrix44f rotation = getRotation();
-	float rotMatrix[16] =
-	{
-		rotation.getEntry(0,0), rotation.getEntry(0,1), rotation.getEntry(0,2), 0.0f,
-		rotation.getEntry(1,0), rotation.getEntry(1,1), rotation.getEntry(1,2), 0.0f,
-		rotation.getEntry(2,0), rotation.getEntry(2,1), rotation.getEntry(2,2), 0.0f,
-		0.0f, 0.0f, 0.0f, 1.0f
-	};
-	Vector3f translation = getTranslation();
-	float transMatrix[16] =
-	{
-		1.0f, 0.0f, 0.0f, 0.0f,
-		0.0f, 1.0f, 0.0f, 0.0f,
-		0.0f, 0.0f, 1.0f, 0.0f,
-		translation.getEntry(0), translation.getEntry(1), translation.getEntry(2), 1.0f
-	};
-
-	// set the model-to-world transformation
-	glMatrixMode(GL_MODELVIEW);
-	glPushMatrix();
-	glMultMatrixf(transMatrix);
-	glMultMatrixf(rotMatrix);
-
 	gluSphere(quadObj,radius,slices,stacks);
-	glPopMatrix();
 }

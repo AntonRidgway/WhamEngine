@@ -188,7 +188,6 @@ xcopy /y "$(SolutionDir)assets\*.*" "$(OutDir)"</Command>
     <ClInclude Include="Resource.h" />
     <ClInclude Include="resources\LoadedGeometry.h" />
     <ClInclude Include="resources\Material.h" />
-    <ClInclude Include="resources\ResourceMan.h" />
     <ClInclude Include="resources\Texture.h" />
     <ClInclude Include="scene\AnimChannel.h" />
     <ClInclude Include="scene\AnimClip.h" />
@@ -233,7 +232,6 @@ xcopy /y "$(SolutionDir)assets\*.*" "$(OutDir)"</Command>
     <ClCompile Include="RenderMan.cpp" />
     <ClCompile Include="resources\LoadedGeometry.cpp" />
     <ClCompile Include="resources\Material.cpp" />
-    <ClCompile Include="resources\ResourceMan.cpp" />
     <ClCompile Include="resources\Texture.cpp" />
     <ClCompile Include="scene\AnimChannel.cpp" />
     <ClCompile Include="scene\AnimClip.cpp" />

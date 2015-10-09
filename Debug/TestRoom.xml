@@ -1,25 +1,46 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<meshes>
-  <sphere>
-    <sphere1>
-      <location>-3,3,0</location>
-      <orientation>0,0,0</orientation>
-    </sphere1>
-    <sphere2>
-      <location>3,3,2</location>
-      <orientation>0,0,0</orientation>
-    </sphere2>
-  </sphere>
-  <quad>
-    <location />
-    <orientation />
-  </quad>
-  <rectangle>
-    <location />
-    <orientation />
-  </rectangle>
-  <pyramid>
-    <location />
-    <orientation />
-  </pyramid>
-</meshes>
+<Root>
+  <Entities>
+    <Quad Location="" />
+    <Quad />
+    <Quad />
+    <Quad />
+    <Quad />
+    <Quad />
+    <Box />
+    <Box />
+    <Box />
+    <Pyramid />
+    <Pyramid />
+    <QuadricSphere />
+    <QuadricSphere />
+    <QuadricSphere />
+    <QuadricSphere />
+    <QuadricSphere />
+  </Entities>
+  <Lights>
+    <Ambient />
+    <Point />
+    <Point />
+    <Point />
+    <Dir />
+  </Lights>
+  <Textures>
+    <Texture id="box" path="box.bmp" />
+    <Texture id="blank" path="blank.bmp" />
+    <Texture id="brick" path="brick.bmp" />
+    <Texture />
+    <Texture />
+    <Texture />
+    <Texture />
+    <Texture />
+  </Textures>
+  <Materials>
+    <Material />
+    <Material />
+    <Material />
+    <Material />
+    <Material />
+    <Material />
+  </Materials>
+</Root>

@@ -33,7 +33,7 @@ public:
 				   GLdouble rIn = 1.0f, GLint lonIn = 6, GLint latIn = 6,
 				   GLenum dSIn = GLU_FILL, GLenum nIn = GLU_SMOOTH, GLenum oIn = GLU_OUTSIDE, GLenum teIn = GL_TRUE);
 	~QuadricSphere();
-	virtual void draw();
+	virtual void renderSpecific();
 };
 
 #endif

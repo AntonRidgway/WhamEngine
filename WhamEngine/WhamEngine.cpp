@@ -7,13 +7,13 @@
 #include "RenderMan.h"
 #include "filesys/FileSystemMan.h"
 #include "input/InputMan.h"
-#include "resources/ResourceMan.h"
 #include "scene/StateMan.h"
 #include <string>
 #include <gl/freeglut.h>
 
 const int windowWidth = 800;
 const int windowHeight = 600;
+const std::string roomFile = "TestRoom.xml";
 
 /**
  * main - Sets up the GLUT window, and manages startup and shutdown
@@ -29,10 +29,10 @@ int main(int argc, char **argv) {
 	glutCreateWindow("WhamEngine Test");
 	
 	// Start main program components and register callbacks.
-	ResourceMan::getInstance().startUp();
 	InputMan::getInstance().startUp();
 	StateMan::getInstance().startUp(windowWidth,windowHeight);
 	FileSystemMan::getInstance().startUp();
+	FileSystemMan::getInstance().loadLevel(roomFile, StateMan::getInstance().getSceneGraph());
 	RenderMan::getInstance().startUp(windowWidth,windowHeight);
 
 	glutMainLoop(); // enter GLUT event processing cycle
@@ -42,7 +42,6 @@ int main(int argc, char **argv) {
 	FileSystemMan::getInstance().shutDown();
 	StateMan::getInstance().shutDown();
 	InputMan::getInstance().shutDown();
-	ResourceMan::getInstance().shutDown();
-
+	
 	return 1;
 }

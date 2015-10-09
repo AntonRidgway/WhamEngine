@@ -79,7 +79,7 @@ void InputMan::startUp(){
 	commandList.push_back(shootBall);
 	keyMapping['b'] = shootBall;
 	keyMapping['B'] = shootBall;
-	Command* setGravity = new ShootCommand();
+	Command* setGravity = new SetGravityCommand();
 	commandList.push_back(setGravity);
 	keyMapping['g'] = setGravity;
 	keyMapping['G'] = setGravity;
