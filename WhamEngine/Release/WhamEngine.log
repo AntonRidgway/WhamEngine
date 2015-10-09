@@ -1,36 +1,139 @@
-﻿Build started 10/3/2015 5:22:02 PM.
+﻿Build started 10/9/2015 3:07:28 AM.
      1>Project "D:\Documents\Visual Studio 2015\Projects\WhamEngine\WhamEngine\WhamEngine.vcxproj" on node 2 (Build target(s)).
-     1>Link:
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Yc"stdafx.h" /Fp"Release\WhamEngine.pch" /Fo"Release\\" /Fd"Release\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
+         stdafx.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Yu"stdafx.h" /Fp"Release\WhamEngine.pch" /Fo"Release\\" /Fd"Release\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt filesys\FileSystemMan.cpp input\ForwardCommand.cpp input\InputMan.cpp input\PitchCommand.cpp input\RightCommand.cpp input\RollCommand.cpp input\RotationCommand.cpp input\ScaleCommand.cpp input\SetGravityCommand.cpp input\ShootCommand.cpp input\TransformationCommand.cpp input\TranslationCommand.cpp input\UpCommand.cpp input\YawCommand.cpp math\Math.cpp physics\PhysicsMan.cpp RenderMan.cpp resources\LoadedGeometry.cpp resources\Material.cpp resources\Texture.cpp scene\animation\AnimChannel.cpp scene\animation\AnimClip.cpp scene\animation\Bone.cpp scene\animation\VertexBoneInfo.cpp scene\Camera.cpp scene\Clock.cpp scene\entities\Box.cpp scene\entities\Entity.cpp scene\entities\Geometry.cpp scene\entities\Pyramid.cpp scene\entities\Quad.cpp scene\entities\Quadric.cpp scene\entities\TriMesh.cpp scene\hud\HUDText.cpp scene\lights\Color.cpp scene\lights\Light.cpp scene\Scene.cpp scene\Spatial.cpp scene\StateMan.cpp WhamEngine.cpp
+         FileSystemMan.cpp
+     1>filesys\FileSystemMan.cpp(172): warning C4305: 'argument': truncation from 'double' to 'float'
+     1>filesys\FileSystemMan.cpp(179): warning C4305: 'argument': truncation from 'double' to 'float'
+     1>filesys\FileSystemMan.cpp(501): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+     1>filesys\FileSystemMan.cpp(507): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+     1>filesys\FileSystemMan.cpp(551): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+         ForwardCommand.cpp
+         InputMan.cpp
+         PitchCommand.cpp
+         RightCommand.cpp
+         RollCommand.cpp
+         RotationCommand.cpp
+         ScaleCommand.cpp
+         SetGravityCommand.cpp
+         ShootCommand.cpp
+         TransformationCommand.cpp
+         TranslationCommand.cpp
+         UpCommand.cpp
+         YawCommand.cpp
+         Math.cpp
+         PhysicsMan.cpp
+         RenderMan.cpp
+         LoadedGeometry.cpp
+     1>resources\LoadedGeometry.cpp(35): warning C4244: 'initializing': conversion from '__int64' to 'float', possible loss of data
+         Material.cpp
+         Texture.cpp
+         Compiling...
+         AnimChannel.cpp
+         AnimClip.cpp
+         Bone.cpp
+         VertexBoneInfo.cpp
+         Camera.cpp
+         Clock.cpp
+         Box.cpp
+         Entity.cpp
+         Geometry.cpp
+         Pyramid.cpp
+         Quad.cpp
+         Quadric.cpp
+         TriMesh.cpp
+         HUDText.cpp
+         Color.cpp
+         Light.cpp
+         Scene.cpp
+         Spatial.cpp
+         StateMan.cpp
+     1>scene\StateMan.cpp(25): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+         WhamEngine.cpp
+       Link:
          C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Documents\Visual Studio 2015\Projects\WhamEngine\Release\WhamEngine.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib opengl32.lib glu32.lib freeglut.lib release/assimp.lib BulletCollision_vs2010.lib BulletDynamics_vs2010.lib LinearMath_vs2010.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"D:\Documents\Visual Studio 2015\Projects\WhamEngine\Release\WhamEngine.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG:incremental /TLBID:1 /ENTRY:"mainCRTStartup" /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Documents\Visual Studio 2015\Projects\WhamEngine\Release\WhamEngine.lib" /MACHINE:X86 /SAFESEH Release\WhamEngine.res
+         Release\FileSystemMan.obj
+         Release\ForwardCommand.obj
+         Release\InputMan.obj
+         Release\PitchCommand.obj
+         Release\RightCommand.obj
+         Release\RollCommand.obj
+         Release\RotationCommand.obj
+         Release\ScaleCommand.obj
+         Release\SetGravityCommand.obj
+         Release\ShootCommand.obj
+         Release\TransformationCommand.obj
+         Release\TranslationCommand.obj
+         Release\UpCommand.obj
+         Release\YawCommand.obj
+         Release\Math.obj
+         Release\PhysicsMan.obj
+         Release\RenderMan.obj
+         Release\LoadedGeometry.obj
+         Release\Material.obj
+         Release\Texture.obj
          Release\AnimChannel.obj
          Release\AnimClip.obj
          Release\Bone.obj
-         Release\Geometry.obj
-         Release\LoadedGeometry.obj
-         Release\Material.obj
-         Release\Node.obj
-         Release\ResourceMan.obj
-         Release\Spatial.obj
-         Release\Texture.obj
-         Release\TriMesh.obj
          Release\VertexBoneInfo.obj
+         Release\Camera.obj
+         Release\Clock.obj
+         Release\Box.obj
+         Release\Entity.obj
+         Release\Geometry.obj
+         Release\Pyramid.obj
+         Release\Quad.obj
+         Release\Quadric.obj
+         Release\TriMesh.obj
+         Release\HUDText.obj
+         Release\Color.obj
+         Release\Light.obj
+         Release\Scene.obj
+         Release\Spatial.obj
+         Release\StateMan.obj
          Release\stdafx.obj
          Release\WhamEngine.obj
          Generating code
-         0 of 5 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
-           0 functions were new in current compilation
-           0 functions had inline decision re-evaluated but remain unchanged
+         All 1200 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
          Finished generating code
          WhamEngine.vcxproj -> D:\Documents\Visual Studio 2015\Projects\WhamEngine\Release\WhamEngine.exe
        PostBuildEvent:
          xcopy /y "D:\Documents\Visual Studio 2015\Projects\WhamEngine\dlls\*.dll" "D:\Documents\Visual Studio 2015\Projects\WhamEngine\Release\"
+         xcopy /y "D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\*.*" "D:\Documents\Visual Studio 2015\Projects\WhamEngine\Release\"
          :VCEnd
          D:\Documents\Visual Studio 2015\Projects\WhamEngine\dlls\Assimp32.dll
          D:\Documents\Visual Studio 2015\Projects\WhamEngine\dlls\Assimp32d.dll
          D:\Documents\Visual Studio 2015\Projects\WhamEngine\dlls\freeglut.dll
          3 File(s) copied
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\ball.bmp
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\bball.bmp
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\blank.bmp
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\boblampclean.md5anim
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\boblampclean.md5mesh
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\box.bmp
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\brick.bmp
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\carpet.bmp
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\eyeball.bmp
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\guard1_body.bmp
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\guard1_face.bmp
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\guard1_helmet.bmp
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\iron_grill.bmp
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\mountain.bmp
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\round_grill.bmp
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\Sinbad.3ds
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\sinbad_body.bmp
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\sinbad_cloth.bmp
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\sinbad_sword.bmp
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\sky.bmp
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\TestRoom.xml
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\texture.bmp
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\wall.bmp
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\wallpic.bmp
+         24 File(s) copied
      1>Done Building Project "D:\Documents\Visual Studio 2015\Projects\WhamEngine\WhamEngine\WhamEngine.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.64
+Time Elapsed 00:00:27.18
