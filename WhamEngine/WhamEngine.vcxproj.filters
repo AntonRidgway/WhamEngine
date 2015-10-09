@@ -174,12 +174,6 @@
     <ClInclude Include="scene\Clock.h">
       <Filter>Header Files\scene</Filter>
     </ClInclude>
-    <ClInclude Include="scene\Node.h">
-      <Filter>Header Files\scene</Filter>
-    </ClInclude>
-    <ClInclude Include="scene\SceneGraph.h">
-      <Filter>Header Files\scene</Filter>
-    </ClInclude>
     <ClInclude Include="scene\Spatial.h">
       <Filter>Header Files\scene</Filter>
     </ClInclude>
@@ -227,6 +221,9 @@
     </ClInclude>
     <ClInclude Include="scene\hud\HUDText.h">
       <Filter>Header Files\scene\hud</Filter>
+    </ClInclude>
+    <ClInclude Include="scene\Scene.h">
+      <Filter>Header Files\scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -302,12 +299,6 @@
     <ClCompile Include="scene\Clock.cpp">
       <Filter>Source Files\scene</Filter>
     </ClCompile>
-    <ClCompile Include="scene\Node.cpp">
-      <Filter>Source Files\scene</Filter>
-    </ClCompile>
-    <ClCompile Include="scene\SceneGraph.cpp">
-      <Filter>Source Files\scene</Filter>
-    </ClCompile>
     <ClCompile Include="scene\Spatial.cpp">
       <Filter>Source Files\scene</Filter>
     </ClCompile>
@@ -355,6 +346,9 @@
     </ClCompile>
     <ClCompile Include="scene\hud\HUDText.cpp">
       <Filter>Source Files\scene\hud</Filter>
+    </ClCompile>
+    <ClCompile Include="scene\Scene.cpp">
+      <Filter>Source Files\scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

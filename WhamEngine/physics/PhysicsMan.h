@@ -3,7 +3,7 @@
 
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicsCommon.h>
-#include "scene\Entity.h"
+#include "scene/entities/Entity.h"
 
 class PhysicsMan
 {

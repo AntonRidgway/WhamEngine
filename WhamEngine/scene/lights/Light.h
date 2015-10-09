@@ -2,7 +2,7 @@
 #define WE_LIGHT_H
 
 #include "Color.h"
-#include "Spatial.h"
+#include "scene/Spatial.h"
 
 class Light : public Spatial
 {

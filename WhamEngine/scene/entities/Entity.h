@@ -1,7 +1,7 @@
 #ifndef WE_ENTITY_H
 #define WE_ENTITY_H
 
-#include "Spatial.h"
+#include "scene/Spatial.h"
 #include <string>
 #include <Windows.h>
 #include <gl/GL.h>

@@ -1,14 +1,6 @@
-﻿Build started 10/8/2015 11:33:12 PM.
+﻿Build started 10/9/2015 2:59:56 AM.
      1>Project "D:\Documents\Visual Studio 2015\Projects\WhamEngine\WhamEngine\WhamEngine.vcxproj" on node 2 (Build target(s)).
-     1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Yu"stdafx.h" /Fp"Debug\WhamEngine.pch" /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt filesys\FileSystemMan.cpp
-         FileSystemMan.cpp
-     1>d:\documents\visual studio 2015\projects\whamengine\whamengine\filesys\filesystemman.cpp(172): warning C4305: 'argument': truncation from 'double' to 'float'
-     1>d:\documents\visual studio 2015\projects\whamengine\whamengine\filesys\filesystemman.cpp(179): warning C4305: 'argument': truncation from 'double' to 'float'
-     1>d:\documents\visual studio 2015\projects\whamengine\whamengine\filesys\filesystemman.cpp(501): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-     1>d:\documents\visual studio 2015\projects\whamengine\whamengine\filesys\filesystemman.cpp(507): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-     1>d:\documents\visual studio 2015\projects\whamengine\whamengine\filesys\filesystemman.cpp(551): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-       Link:
+     1>Link:
          C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Documents\Visual Studio 2015\Projects\WhamEngine\Debug\WhamEngine.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib opengl32.lib glu32.lib freeglut.lib release/assimp.lib BulletCollision_vs2010_debug.lib BulletDynamics_vs2010_debug.lib LinearMath_vs2010_debug.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"D:\Documents\Visual Studio 2015\Projects\WhamEngine\Debug\WhamEngine.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /ENTRY:"mainCRTStartup" /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Documents\Visual Studio 2015\Projects\WhamEngine\Debug\WhamEngine.lib" /MACHINE:X86 Debug\WhamEngine.res
          Debug\FileSystemMan.obj
          Debug\ForwardCommand.obj
@@ -33,22 +25,22 @@
          Debug\AnimChannel.obj
          Debug\AnimClip.obj
          Debug\Bone.obj
-         Debug\Box.obj
+         Debug\VertexBoneInfo.obj
          Debug\Camera.obj
          Debug\Clock.obj
-         Debug\Color.obj
+         Debug\Box.obj
          Debug\Entity.obj
          Debug\Geometry.obj
-         Debug\Light.obj
-         Debug\Node.obj
          Debug\Pyramid.obj
          Debug\Quad.obj
          Debug\Quadric.obj
-         Debug\SceneGraph.obj
+         Debug\TriMesh.obj
+         Debug\HUDText.obj
+         Debug\Color.obj
+         Debug\Light.obj
+         Debug\Scene.obj
          Debug\Spatial.obj
          Debug\StateMan.obj
-         Debug\TriMesh.obj
-         Debug\VertexBoneInfo.obj
          Debug\stdafx.obj
          Debug\WhamEngine.obj
          WhamEngine.vcxproj -> D:\Documents\Visual Studio 2015\Projects\WhamEngine\Debug\WhamEngine.exe
@@ -89,4 +81,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.93
+Time Elapsed 00:00:01.38

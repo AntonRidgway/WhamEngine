@@ -38,22 +38,22 @@ void FileSystemMan::shutDown()
 
 	//clean up Stuff
 	/*
-	Light** lightList = StateMan::getInstance().getSceneGraph()->getLightEList();
-	int lLen = StateMan::getInstance().getSceneGraph()->getNumLightE();
+	Light** lightList = StateMan::getInstance().getScene()->getLightEList();
+	int lLen = StateMan::getInstance().getScene()->getNumLightE();
 	for(int i = 0; i < lLen; i++) 
 	{
 		if(lightList[i] != NULL) delete lightList[i];
 	}
 	
-	Entity** hudList = StateMan::getInstance().getSceneGraph()->getHudEList();
-	int hLen = StateMan::getInstance().getSceneGraph()->getNumHudE();
+	Entity** hudList = StateMan::getInstance().getScene()->getHudEList();
+	int hLen = StateMan::getInstance().getScene()->getNumHudE();
 	for(int i = 0; i < hLen; i++) delete hudList[i];
 
-	Entity** geomList = StateMan::getInstance().getSceneGraph()->getSceneEList();
-	int gLen = StateMan::getInstance().getSceneGraph()->getNumSceneE();
+	Entity** geomList = StateMan::getInstance().getScene()->getSceneEList();
+	int gLen = StateMan::getInstance().getScene()->getNumSceneE();
 	for(int i = 0; i < gLen; i++) delete geomList[i];*/
 }
-void FileSystemMan::loadLevel(std::string roomFile, SGRoot* graph)
+void FileSystemMan::loadLevel(std::string roomFile, Scene* scene)
 {
 	////Read in the level file.
 	//std::ifstream reader(findFileAbsolute(roomFile));
@@ -88,126 +88,126 @@ void FileSystemMan::loadLevel(std::string roomFile, SGRoot* graph)
 	Geometry* simpleGeom = new Geometry(shape, carpetTex, dullMat);
 	simpleGeom->rotateX(1.571f);
 	simpleGeom->translate(0.0f,-15.0f,15.0f);
-	StateMan::getInstance().getSceneGraph()->addSceneE(simpleGeom);
+	scene->addSceneE(simpleGeom);
 	
 	//north wall
 	shape = new Quad(30.0f,30.0f);
 	simpleGeom = new Geometry(shape, wallTex, dullMat);
 	simpleGeom->translate(0.0f,-15.0f,-15.0f);
-	StateMan::getInstance().getSceneGraph()->addSceneE(simpleGeom);
+	scene->addSceneE(simpleGeom);
 
 	//south wall
 	shape = new Quad(30.0f,30.0f);
 	simpleGeom = new Geometry(shape, wallTex, dullMat);
 	simpleGeom->rotateY(3.1415f);
 	simpleGeom->translate(0.0f,-15.0f,15.0f);
-	StateMan::getInstance().getSceneGraph()->addSceneE(simpleGeom);
+	scene->addSceneE(simpleGeom);
 
 	//west wall
 	shape = new Quad(30.0f,30.0f);
 	simpleGeom = new Geometry(shape, wallTex, dullMat);
 	simpleGeom->rotateY(-1.571f);
 	simpleGeom->translate(-15.0f,-15.0f,0.0f);
-	StateMan::getInstance().getSceneGraph()->addSceneE(simpleGeom);
+	scene->addSceneE(simpleGeom);
 
 	//east wall
 	shape = new Quad(30.0f,30.0f);
 	simpleGeom = new Geometry(shape, wallPicTex, dullMat);
 	simpleGeom->rotateY(1.571f);
 	simpleGeom->translate(15.0f,-15.0f,0.0f);
-	StateMan::getInstance().getSceneGraph()->addSceneE(simpleGeom);
+	scene->addSceneE(simpleGeom);
 
 	//sky
 	shape = new Quad(30.0f,30.0f);
 	simpleGeom = new Geometry(shape, skyTex, dullMat);
 	simpleGeom->rotateX(-1.571f);
 	simpleGeom->translate(0.0f,15.0f,-15.0f);
-	StateMan::getInstance().getSceneGraph()->addSceneE(simpleGeom);
+	scene->addSceneE(simpleGeom);
 
 	//tall box
 	shape = new Box(2.0f,1.5f,3.0f);
 	simpleGeom = new Geometry(shape, boxTex, dullMat);
 	simpleGeom->translate(2.3f,0.0f,-7.5f);
 	simpleGeom->rotateY(0.3f);
-	StateMan::getInstance().getSceneGraph()->addSceneE(simpleGeom);
+	scene->addSceneE(simpleGeom);
 	
 	//Tiny Box
 	shape = new Box(1.0f,1.0f,1.0f);
 	simpleGeom = new Geometry(shape, brickTex, dullMat);
 	simpleGeom->translate(3.3f, 0.0f, -7.5f);
 	simpleGeom->rotateY(0.6f);
-	StateMan::getInstance().getSceneGraph()->addSceneE(simpleGeom);
+	scene->addSceneE(simpleGeom);
 	
 	//Mid Box
 	shape = new Box(2.0f,2.0f,2.0f);
 	simpleGeom = new Geometry(shape, brickTex, dullMat);
 	simpleGeom->translate(4.3f, 0.0f, -7.5f);
 	simpleGeom->rotateY(0.9f);
-	StateMan::getInstance().getSceneGraph()->addSceneE(simpleGeom);
+	scene->addSceneE(simpleGeom);
 
 	//Regular Pyramid
 	shape = new Pyramid(1.0f,2.0f);
 	simpleGeom = new Geometry(shape, brickTex, dullMat);
 	simpleGeom->translate(5.3f, 0.0f, -7.5f);
 	simpleGeom->rotateY(1.2f);
-	StateMan::getInstance().getSceneGraph()->addSceneE(simpleGeom);
+	scene->addSceneE(simpleGeom);
 	
 	//tall pyramid
 	shape = new Pyramid(1.0f, 3.0f);
 	simpleGeom = new Geometry(shape, wallTex, dullMat);
 	simpleGeom->translate(6.3f, 0.0f, -7.5f);
 	simpleGeom->rotateY(1.5f);
-	StateMan::getInstance().getSceneGraph()->addSceneE(simpleGeom);
+	scene->addSceneE(simpleGeom);
 
 	//quadrics
-	StateMan::getInstance().getSceneGraph()->addSceneE(new QuadricSphere(eyeTex, slimeMat,-5.0f,5.0f,0.0f, 1.5f,8,5, GLU_FILL,GLU_SMOOTH,GLU_OUTSIDE,GL_TRUE));
-	StateMan::getInstance().getSceneGraph()->addSceneE(new QuadricSphere(eyeTex, slimeMat,-5.0f,5.0f,0.0f, 0.5f,6,4, GLU_FILL,GLU_SMOOTH,GLU_OUTSIDE,GL_TRUE));
+	scene->addSceneE(new QuadricSphere(eyeTex, slimeMat,-5.0f,5.0f,0.0f, 1.5f,8,5, GLU_FILL,GLU_SMOOTH,GLU_OUTSIDE,GL_TRUE));
+	scene->addSceneE(new QuadricSphere(eyeTex, slimeMat,-5.0f,5.0f,0.0f, 0.5f,6,4, GLU_FILL,GLU_SMOOTH,GLU_OUTSIDE,GL_TRUE));
 
 	//Loaded Mesh
 	LoadedGeometry* loadedGeom;
 	std::string bobPath = findFileAbsolute("boblampclean.md5mesh");
 	LoadMesh(bobPath.c_str(), loadedGeom);
-	StateMan::getInstance().getSceneGraph()->addSceneE(loadedGeom);
+	scene->addSceneE(loadedGeom);
 	loadedGeom->translateY(-1.5);
 	loadedGeom->rotateX(1.7);
 	loadedGeom->setScale(0.1f);
 
 	std::string sinbadPath = findFileAbsolute("Sinbad.3ds");
 	LoadMesh(sinbadPath.c_str(), loadedGeom);
-	StateMan::getInstance().getSceneGraph()->addSceneE(loadedGeom);
+	scene->addSceneE(loadedGeom);
 	loadedGeom->translateY(1.5);
 	loadedGeom->rotateX(-1.7);
 	
-	StateMan::getInstance().getSceneGraph()->addSceneE(new QuadricSphere(blankTex, bShinyMat, -7.0f,7.0f,7.0f,0.3f,6,6,GLU_FILL,GLU_SMOOTH,GLU_OUTSIDE,GL_TRUE));
-	StateMan::getInstance().getSceneGraph()->addSceneE(new QuadricSphere(blankTex, gShinyMat, 0.0f,0.0f,-7.0f,0.3f,6,6,GLU_FILL,GLU_SMOOTH,GLU_OUTSIDE,GL_TRUE));
-	StateMan::getInstance().getSceneGraph()->addSceneE(new QuadricSphere(blankTex, rShinyMat, 7.0f,-7.0f,3.0f,0.3f,6,6,GLU_FILL,GLU_SMOOTH,GLU_OUTSIDE,GL_TRUE));
+	scene->addSceneE(new QuadricSphere(blankTex, bShinyMat, -7.0f,7.0f,7.0f,0.3f,6,6,GLU_FILL,GLU_SMOOTH,GLU_OUTSIDE,GL_TRUE));
+	scene->addSceneE(new QuadricSphere(blankTex, gShinyMat, 0.0f,0.0f,-7.0f,0.3f,6,6,GLU_FILL,GLU_SMOOTH,GLU_OUTSIDE,GL_TRUE));
+	scene->addSceneE(new QuadricSphere(blankTex, rShinyMat, 7.0f,-7.0f,3.0f,0.3f,6,6,GLU_FILL,GLU_SMOOTH,GLU_OUTSIDE,GL_TRUE));
 
 	//---------------------------------------------------------------------------------------------
 	//Load HUD Entities
 	
 	//---------------------------------------------------------------------------------------------
 	//Load Lights
-	StateMan::getInstance().getSceneGraph()->addLightE(new Light(1.0f, 1.0f, 1.0f, 1.0f,
+	scene->addLightE(new Light(1.0f, 1.0f, 1.0f, 1.0f,
 									0.0f, 0.0f, 0.0f, 1.0f,
 									0.0f, 0.0f, 0.0f, 1.0f,
 									0.0f, 0.0f, 0.0f,
 									0.0f, 0.0f, 0.0f));
-	StateMan::getInstance().getSceneGraph()->addLightE(new PointLight(0.0f,0.0f,0.8f,1.0f,
+	scene->addLightE(new PointLight(0.0f,0.0f,0.8f,1.0f,
 									0.0f,0.0f,3.2f,1.0f,
 									0.5f,0.5f,0.5f,1.0f,
 									-7.0f,7.0f,7.0f,
 									0.9f,0.1f,0.01f));
-	StateMan::getInstance().getSceneGraph()->addLightE(new PointLight(0.0f,0.8f,0.0f,1.0f,
+	scene->addLightE(new PointLight(0.0f,0.8f,0.0f,1.0f,
 									0.0f,3.2f,0.0f,1.0f,
 									0.5f,0.5f,0.5f,1.0f,
 									0.0f,0.0f,-7.0f,
 									0.9f,0.1f,0.01f));
-	StateMan::getInstance().getSceneGraph()->addLightE(new PointLight(0.8f,0.0f,0.0f,1.0f,
+	scene->addLightE(new PointLight(0.8f,0.0f,0.0f,1.0f,
 									3.2f,0.0f,0.0f,1.0f,
 									0.5f,0.5f,0.5f,1.0f,
 									7.0f,-7.0f,3.0f,
 									0.9f,0.1f,0.01f));
-	StateMan::getInstance().getSceneGraph()->addLightE(new DirLight(0.01f,0.0f,0.04f,1.0f,
+	scene->addLightE(new DirLight(0.01f,0.0f,0.04f,1.0f,
 									0.16f,0.14f,0.06f,1.0f,
 									0.04f,0.038f,0.014f,1.0f,
 									-1.0f,-1.0f,-1.0f));
@@ -572,7 +572,7 @@ bool FileSystemMan::LoadMesh(const char* filename, LoadedGeometry*& meshOut)
 }
 
 /*
-* buildSceneGraph recursively traverses the aiScene's node structure and converts
+* buildSkeleton recursively traverses the aiScene's node structure and converts
 * it to a local format.
 */
 void FileSystemMan::buildSkeleton(aiNode* currAiNode, Bone* currBone, Bone** bonePile, int& countBones)

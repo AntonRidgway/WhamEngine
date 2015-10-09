@@ -3,8 +3,8 @@
 
 #include <Windows.h>
 #include <gl\GL.h>
-#include "Bone.h"
-#include "VertexBoneInfo.h"
+#include "scene/animation/Bone.h"
+#include "scene/animation/VertexBoneInfo.h"
 
 /**
  * TriMesh defines a mesh of triangles.

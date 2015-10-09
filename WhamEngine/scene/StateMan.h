@@ -8,7 +8,7 @@
 #include "input/Command.h"
 #include "input/InputMan.h"
 #include "physics/PhysicsMan.h"
-#include "scene/SceneGraph.h"
+#include "scene/Scene.h"
 
 class StateMan
 {
@@ -21,7 +21,8 @@ private:
 	Camera* myCam;
 	float playerMoveSpeed; //units-per-second
 	float playerTurnSpeed; //units-per-second
-	SGRoot* mySceneGraph;
+	Scene* myScene;
+	float currentFPS;
 	void updateControl(double secsPassed);
 	void updatePhysics(double secsPassed);
 public:
@@ -33,6 +34,7 @@ public:
 	void shutDown();
 	void updateState();
 	Camera* getCamera();
-	SGRoot* getSceneGraph();
+	Scene* getScene();
+	float getFPS();
 };
 #endif

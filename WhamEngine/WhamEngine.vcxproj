@@ -205,8 +205,7 @@ xcopy /y "$(SolutionDir)assets\*.*" "$(OutDir)"</Command>
     <ClInclude Include="scene\hud\HUDText.h" />
     <ClInclude Include="scene\lights\Color.h" />
     <ClInclude Include="scene\lights\Light.h" />
-    <ClInclude Include="scene\Node.h" />
-    <ClInclude Include="scene\SceneGraph.h" />
+    <ClInclude Include="scene\Scene.h" />
     <ClInclude Include="scene\Spatial.h" />
     <ClInclude Include="scene\StateMan.h" />
     <ClInclude Include="stdafx.h" />
@@ -250,8 +249,7 @@ xcopy /y "$(SolutionDir)assets\*.*" "$(OutDir)"</Command>
     <ClCompile Include="scene\hud\HUDText.cpp" />
     <ClCompile Include="scene\lights\Color.cpp" />
     <ClCompile Include="scene\lights\Light.cpp" />
-    <ClCompile Include="scene\Node.cpp" />
-    <ClCompile Include="scene\SceneGraph.cpp" />
+    <ClCompile Include="scene\Scene.cpp" />
     <ClCompile Include="scene\Spatial.cpp" />
     <ClCompile Include="scene\StateMan.cpp" />
     <ClCompile Include="stdafx.cpp">

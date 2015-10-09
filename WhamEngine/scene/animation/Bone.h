@@ -2,8 +2,8 @@
 #define WE_SKNODE_H
 
 #include <vector>
-#include "../math/Matrix.h"
-#include "../scene/Spatial.h"
+#include "math/Matrix.h"
+#include "scene/Spatial.h"
 
 class Bone : public Spatial
 {

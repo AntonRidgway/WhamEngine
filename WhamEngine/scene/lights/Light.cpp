@@ -1,6 +1,6 @@
 #include "stdafx.h"
 
-#include "../math/Vector.h"
+#include "math/Vector.h"
 #include "Color.h"
 #include "Light.h"
 

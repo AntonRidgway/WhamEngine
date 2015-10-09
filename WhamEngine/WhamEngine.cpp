@@ -32,7 +32,7 @@ int main(int argc, char **argv) {
 	InputMan::getInstance().startUp();
 	StateMan::getInstance().startUp(windowWidth,windowHeight);
 	FileSystemMan::getInstance().startUp();
-	FileSystemMan::getInstance().loadLevel(roomFile, StateMan::getInstance().getSceneGraph());
+	FileSystemMan::getInstance().loadLevel(roomFile, StateMan::getInstance().getScene());
 	RenderMan::getInstance().startUp(windowWidth,windowHeight);
 
 	glutMainLoop(); // enter GLUT event processing cycle

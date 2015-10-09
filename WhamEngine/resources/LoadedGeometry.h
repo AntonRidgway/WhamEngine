@@ -5,10 +5,10 @@
 #include <assimp\anim.h>
 #include "Material.h"
 #include "Texture.h"
-#include "scene/AnimClip.h"
-#include "scene/Bone.h"
-#include "scene/Entity.h"
-#include "scene/TriMesh.h"
+#include "scene/animation/AnimClip.h"
+#include "scene/animation/Bone.h"
+#include "scene/entities/Entity.h"
+#include "scene/entities/TriMesh.h"
 
 class LoadedGeometry : public Entity
 {

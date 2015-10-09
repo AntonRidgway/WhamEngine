@@ -1,24 +1,23 @@
-#ifndef WE_NODE_H
-#define WE_NODE_H
+#ifndef WE_HUDTEXT_H
+#define WE_HUDTEXT_H
 
-#include <vector>
-#include "scene/Geometry.h"
-#include "scene/Spatial.h"
+#include "Windows.h"
+#include <gl/GL.h>
+#include <gl/freeglut.h>
+#include <string>
+#include "scene/lights/Color.h"
 
-class Node : public Spatial
+class HUDText
 {
 private:
-	Node* parent;
-	std::vector<Geometry*> gChildren;
-	std::vector<Node*> nChildren;
+	std::string text;
+	float x, y;
+	ColorA color;
 public:
-	Node();
-	Node( Node* parent );
-	~Node();
-	void attachChild( Geometry* c );
-	void attachChild( Node* c );
-	Spatial* getChild( std::string nodeName );
-	Node* getNChild( unsigned int index ) const;
+	HUDText(std::string textIn, ColorA colorIn, float xIn = 0, float yIn = 0);
+	void render();
+	std::string getText();
+	void setText(std::string newText);
 };
 
 #endif

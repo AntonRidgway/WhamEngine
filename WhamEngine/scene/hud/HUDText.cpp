@@ -1,46 +1,26 @@
 #include "stdafx.h"
-#include "Node.h"
+#include "HUDText.h"
 
-Node::Node()
-{
-	parent = NULL;
+HUDText::HUDText(std::string textIn, ColorA colorIn, float xIn, float yIn) : text(textIn), color(colorIn), x(xIn), y(yIn) {}
+void HUDText::render() {
+	glMatrixMode(GL_PROJECTION);
+	glPushMatrix();
+	glLoadIdentity();
+	glOrtho(0.0f, 1.0f, 0.0f, 1.0f, -1.0f, 1.0f);
+	glMatrixMode(GL_MODELVIEW);
+	glPushMatrix();
+	glLoadIdentity();
+	glRasterPos2f(x, y);
+	glColor4f(color.getR(), color.getG(), color.getB(), color.getA());
+	glutBitmapString(GLUT_BITMAP_HELVETICA_18, (const unsigned char*)text.c_str());
+	glPopMatrix();
+	glMatrixMode(GL_PROJECTION);
+	glPopMatrix();
+	glMatrixMode(GL_MODELVIEW);
 }
-Node::Node( Node* par )
-{
-	parent = par;
+std::string HUDText::getText() {
+	return text;
 }
-Node::~Node()
-{
-}
-void Node::attachChild( Geometry* c )
-{
-	gChildren.push_back(c);
-}
-void Node::attachChild( Node* c )
-{
-	nChildren.push_back(c);
-}
-Spatial* Node::getChild( std::string nodeName )
-{
-	if(getName()==nodeName) return this;
-	std::vector<Geometry*>::iterator gItr;
-	for ( gItr = gChildren.begin(); gItr != gChildren.end(); gItr++ )
-	{
-		if((*gItr)->getName() == nodeName) return *gItr;
-	}
-	std::vector<Node*>::iterator nItr;
-	for( nItr = nChildren.begin(); nItr != nChildren.end(); nItr++ )
-	{
-		Spatial* wantedNode = (*nItr)->getChild(nodeName);
-		if(wantedNode != NULL) return wantedNode;
-	}
-	return NULL;
-}
-Node* Node::getNChild( unsigned int index ) const
-{
-	if(index >= 0 && index < nChildren.size())
-	{
-		return nChildren[index];
-	}
-	return NULL;
+void HUDText::setText(std::string newText) {
+	text = newText;
 }

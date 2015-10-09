@@ -5,18 +5,18 @@
 #include "resources/LoadedGeometry.h"
 #include "resources/Material.h"
 #include "resources/Texture.h"
-#include "scene/Box.h"
-#include "scene/Pyramid.h"
-#include "scene/Quad.h"
-#include "scene/Quadric.h"
-#include "scene/SceneGraph.h"
+#include "scene/entities/Box.h"
+#include "scene/entities/Geometry.h"
+#include "scene/entities/Pyramid.h"
+#include "scene/entities/Quad.h"
+#include "scene/entities/Quadric.h"
+#include "scene/Scene.h"
 #include "scene/StateMan.h"
 #include <string>
 #include <vector>
 #include <fstream>
 #include <streambuf>
-#include "scene/Bone.h"
-#include "scene/Node.h"
+#include "scene/animation/Bone.h"
 #include <assimp\ai_assert.h>
 #include <assimp\anim.h>
 #include <assimp\Importer.hpp>
@@ -64,7 +64,7 @@ public:
 	}
 	void startUp();
 	void shutDown();
-	void loadLevel( std::string fileName, SGRoot* graph );
+	void loadLevel( std::string fileName, Scene* scene );
 	bool LoadBmp24(const char* filename, int& riWidth, int& riHeight, unsigned char*& raucData);
 	bool LoadMesh(const char* filename, LoadedGeometry*& meshOut);
 	Texture* getTexture(std::string fileName);
@@ -81,6 +81,6 @@ private:
 	std::string findFileAbsolute(std::string fileName);
 	Texture* loadTexture(aiTexture texIn);
 	void buildSkeleton(aiNode* currAiNode, Bone* currBone, Bone** bonePile, int& countBones);
-	Node* GetNode(std::string boneName, Node* rootNode);
+	//Node* GetNode(std::string boneName, Node* rootNode);
 };
 #endif
