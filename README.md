@@ -8,4 +8,5 @@ Also incorporates headers, .lib's, and .dll's from multiple open-source librarie
 - [Bullet 2](http://bulletphysics.org/), for physics.
 - [Assimp](http://assimp.sourceforge.net/), for asset importing.
 - [RapidXML](http://rapidxml.sourceforge.net/), for XML importing.
+
 Assets are all original, except for the Sinbad model and the "BobLampClean" guard model.
