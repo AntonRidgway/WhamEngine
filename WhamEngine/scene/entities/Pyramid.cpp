@@ -82,5 +82,6 @@ Pyramid::~Pyramid()
 {
 	delete vertices;
 	delete indices;
+	delete normals;
 	delete UVs;
 }

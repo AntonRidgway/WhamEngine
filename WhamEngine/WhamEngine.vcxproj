@@ -160,9 +160,6 @@ xcopy /y "$(SolutionDir)assets\*.*" "$(OutDir)"</Command>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="filesys\DblStackAllocator.h" />
     <ClInclude Include="filesys\FileSystemMan.h" />
     <ClInclude Include="filesys\PoolAllocator.h" />

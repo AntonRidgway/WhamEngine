@@ -183,6 +183,7 @@ void LoadedGeometry::traverseSkeleton(float animTime, Bone* currNode, const Matr
 	}
 
     Matrix44f globalTransformation = currNode->getTransformation().multiply(*nodeTransformation);
+	delete nodeTransformation;
 
 	for(int i = 0; i < currNode->getNumMIndices() && currNode->getMIndex(i) != -1; i++)
 	{

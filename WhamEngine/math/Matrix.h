@@ -440,10 +440,10 @@ public:
 	{
 		delete[] data;
 	}
-	Matrix44<Real>* add( Matrix44<Real> b )
+	Matrix44<Real> add( Matrix44<Real> b )
 	{
 		Real* bArray = b.getArray();
-		return new Matrix44<Real>( data[0] + bArray[0], data[1] + bArray[1], data[2] + bArray[2], data[3] + bArray[3],
+		return Matrix44<Real>( data[0] + bArray[0], data[1] + bArray[1], data[2] + bArray[2], data[3] + bArray[3],
 						data[4] + bArray[4], data[5] + bArray[5], data[6] + bArray[6], data[7] + bArray[7],
 						data[8] + bArray[8], data[9] + bArray[9], data[10] + bArray[10], data[11] + bArray[11],
 						data[12] + bArray[12], data[13] + bArray[13], data[14] + bArray[14], data[15] + bArray[15]);
@@ -459,9 +459,9 @@ public:
 		Matrix44 mNew( dataNew );
 		return mNew;
 	}
-	Matrix44<Real>* multiply( const Real s )
+	Matrix44<Real> multiply( const Real s )
 	{
-		return new Matrix44<Real>(data[0]*s,data[1]*s,data[2]*s,data[3]*s,
+		return Matrix44<Real>(data[0]*s,data[1]*s,data[2]*s,data[3]*s,
 									data[4]*s,data[5]*s,data[6]*s,data[7]*s,
 									data[8]*s,data[9]*s,data[10]*s,data[11]*s,
 									data[12]*s,data[13]*s,data[14]*s,data[15]*s);

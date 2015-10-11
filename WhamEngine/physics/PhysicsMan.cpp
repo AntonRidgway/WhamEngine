@@ -390,7 +390,7 @@ void PhysicsMan::step(double secsPassed)
 				btTransform trans;
 				body->getMotionState()->getWorldTransform(trans);
 
-				float* newRot = new float[16];
+				float newRot[16];
 				trans.getOpenGLMatrix(newRot);
 				newRot[15] = 1;
 				currEntity->setTransformation(newRot);
