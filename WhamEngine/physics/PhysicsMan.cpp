@@ -117,12 +117,6 @@ void PhysicsMan::startUp(Entity** SGEin)
 		//add the body to the dynamics world
 		myWorld->addRigidBody(body);
 	}
-
-
-
-
-
-
 	{//create a dynamic rigidbody
 		btCollisionShape* colShape = new btBoxShape(btVector3(1.0,1.5,0.75));
 		myCShapes->push_back(colShape);

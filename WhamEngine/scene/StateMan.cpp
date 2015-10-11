@@ -3,27 +3,32 @@
 
 void StateMan::startUp(int wIn, int hIn)
 {
-	lastUpdateTime = std::chrono::high_resolution_clock::now();
+	myClock = new Clock();
 	myCam = new Camera(wIn,hIn);
 	myScene = new Scene();
 	PhysicsMan::getInstance().startUp(myScene->getSceneEList());
+
+	//Set up FPS Debug text.
+	debugText = true;
+	FPSCounter = new HUDText("", ColorA(1.0f, 1.0f, 1.0f, 1.0f), 0.0f, 0.02f);
+	myScene->addHudE(FPSCounter);
 }
 void StateMan::shutDown()
 {
+	delete FPSCounter;
 	PhysicsMan::getInstance().shutDown();
 	delete myScene;
 	delete myCam;
+	delete myClock;
 }
 
 void StateMan::updateState( )
 {
-	//Calculate the time since the last update, and update the world accordingly.
-	std::chrono::high_resolution_clock::time_point newTime = std::chrono::high_resolution_clock::now();
-	double secs = (std::chrono::duration_cast<std::chrono::nanoseconds>(newTime - lastUpdateTime).count())/1000000000.;
+	float secs = myClock->getTimeSinceLastCall();
 	updateControl(secs);
 	updatePhysics(secs);
 	currentFPS = 1./secs;
-	lastUpdateTime = newTime;
+	FPSCounter->setText("FPS: " + std::to_string(currentFPS));
 }
 Camera* StateMan::getCamera() {
 	return myCam;

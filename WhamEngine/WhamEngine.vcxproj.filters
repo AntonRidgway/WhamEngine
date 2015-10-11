@@ -43,12 +43,6 @@
     <Filter Include="Source Files\math">
       <UniqueIdentifier>{fdaa5f94-a472-497f-a789-6d62939c5f0d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\filesys">
-      <UniqueIdentifier>{276791d8-492c-4746-bcc8-0d7302a3d6f5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\filesys">
-      <UniqueIdentifier>{d135854c-a577-4c05-8f1d-ef75399b308c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\scene\animation">
       <UniqueIdentifier>{4663b8be-9561-4b29-b436-76200a076848}</UniqueIdentifier>
     </Filter>
@@ -153,15 +147,6 @@
     <ClInclude Include="input\UpCommand.h">
       <Filter>Header Files\input</Filter>
     </ClInclude>
-    <ClInclude Include="filesys\DblStackAllocator.h">
-      <Filter>Header Files\filesys</Filter>
-    </ClInclude>
-    <ClInclude Include="filesys\FileSystemMan.h">
-      <Filter>Header Files\filesys</Filter>
-    </ClInclude>
-    <ClInclude Include="filesys\PoolAllocator.h">
-      <Filter>Header Files\filesys</Filter>
-    </ClInclude>
     <ClInclude Include="resources\Material.h">
       <Filter>Header Files\resources</Filter>
     </ClInclude>
@@ -221,6 +206,15 @@
     </ClInclude>
     <ClInclude Include="scene\Scene.h">
       <Filter>Header Files\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="resources\PoolAllocator.h">
+      <Filter>Header Files\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="resources\ResourceMan.h">
+      <Filter>Header Files\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="resources\DblStackAllocator.h">
+      <Filter>Header Files\resources</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -284,9 +278,6 @@
     <ClCompile Include="input\RightCommand.cpp">
       <Filter>Source Files\input</Filter>
     </ClCompile>
-    <ClCompile Include="filesys\FileSystemMan.cpp">
-      <Filter>Source Files\filesys</Filter>
-    </ClCompile>
     <ClCompile Include="resources\Material.cpp">
       <Filter>Source Files\resources</Filter>
     </ClCompile>
@@ -346,6 +337,9 @@
     </ClCompile>
     <ClCompile Include="scene\Scene.cpp">
       <Filter>Source Files\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="resources\ResourceMan.cpp">
+      <Filter>Source Files\resources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

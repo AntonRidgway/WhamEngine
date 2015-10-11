@@ -28,7 +28,7 @@ private:
 	Camera* myCam;
 	Scene* myScene;
 
-	//various lists for rendering
+	//Various lists for rendering
 	GLfloat* lightModel;			//lights
 	Light** lightList;
 	int lListLen;
@@ -36,14 +36,14 @@ private:
 	int sEListLen;
 	HUDText** hudList;				//HUD geometries
 	int hListLen;
-	HUDText* FPSCounter;				//Debug text
 
-	//Text rendering variables
-	bool debugText;
+	//Private functions to manage OpenGL's lights
+	void enableGlLights();
+	void updateGlLightSpecs();
 
-	//private functions to manage OpenGL's lights
-	void createLights();
-	void updateLights();
+	//Lighting constants
+	const GLuint LIGHT_CONSTS[8] = { GL_LIGHT0, GL_LIGHT1, GL_LIGHT2, GL_LIGHT3, GL_LIGHT4, GL_LIGHT5, GL_LIGHT6, GL_LIGHT7 };
+	const int MAX_NUM_LIGHTS = 8;
 };
 
 #endif

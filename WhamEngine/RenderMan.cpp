@@ -17,10 +17,6 @@ void RenderMan::startUp(int width, int height)
 	myScene = StateMan::getInstance().getScene();
 	myCam = StateMan::getInstance().getCamera();
 
-	//Set up FPS text.
-	debugText = true;
-	FPSCounter = new HUDText("", ColorA(1.0f, 1.0f, 1.0f, 1.0f), 0.0f, 0.02f);
-
 	//Create lists of elements to be rendered.
 	sceneEList = myScene->getSceneEList();
 	sEListLen = myScene->getNumSceneE();
@@ -50,14 +46,13 @@ void RenderMan::startUp(int width, int height)
 	glEnable(GL_LIGHTING);				//Enable Lighting
 	glEnable(GL_NORMALIZE);				//Enable Normalizing of normal vectors (could be done manually faster?)
 	glShadeModel(GL_SMOOTH);			//Smooth Shading
-										//glEnable(GL_FOG);					//Enable fog
+	//glEnable(GL_FOG);					//Enable fog
 
 	glEnable(GL_TEXTURE_2D);			//enable 2d textures
 										//set up the texture environment
 	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 	glPolygonMode(GL_FRONT, GL_FILL);	//Enable filling front faces
 	glPolygonMode(GL_BACK, GL_LINE);	//Enable outlining back faces
-
 
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_INDEX_ARRAY);
@@ -70,8 +65,8 @@ void RenderMan::startUp(int width, int height)
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lightModel);
 
 	//set up lights
-	createLights();
-	updateLights();
+	enableGlLights();
+	updateGlLightSpecs();
 
 	//---------------------------------------------------------------------------------------------
 	//Finally, set up the perspective projection matrix to begin.
@@ -85,7 +80,6 @@ void RenderMan::startUp(int width, int height)
 */
 void RenderMan::shutDown()
 {
-	delete FPSCounter;
 	delete[] lightModel;
 }
 /**
@@ -93,14 +87,25 @@ void RenderMan::shutDown()
 */
 void RenderMan::renderScene() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
+	
 	StateMan::getInstance().updateState();
-	updateLights();
+	updateGlLightSpecs();
 	for (int i = 0; i < sEListLen; i++)
 		sceneEList[i]->render();
-
-	FPSCounter->setText("FPS: " + std::to_string(StateMan::getInstance().getFPS()));
-	FPSCounter->render();
+	
+	glMatrixMode(GL_PROJECTION);
+	glPushMatrix();
+	glLoadIdentity();
+	glOrtho(0.0f, 1.0f, 0.0f, 1.0f, -1.0f, 1.0f);
+	glMatrixMode(GL_MODELVIEW);
+	glPushMatrix();
+	glLoadIdentity();
+	for (int i = 0; i < hListLen; i++)
+		hudList[i]->render();
+	glPopMatrix();
+	glMatrixMode(GL_PROJECTION);
+	glPopMatrix();
+	glMatrixMode(GL_MODELVIEW);
 
 	// copy the back buffer into the front buffer
 	glutSwapBuffers();
@@ -115,49 +120,34 @@ void RenderMan::reshape(int width, int height) {
 /**
  * createLights sets the OpenGL lights to reflect the engine's own data structures, in lListLen.
  */
-void RenderMan::createLights()
+void RenderMan::enableGlLights()
 {
-	glDisable(GL_LIGHT0);
-	glDisable(GL_LIGHT1);
-	glDisable(GL_LIGHT2);
-	glDisable(GL_LIGHT3);
-	glDisable(GL_LIGHT4);
-	glDisable(GL_LIGHT5);
-	glDisable(GL_LIGHT6);
-	glDisable(GL_LIGHT7);
-	if( lListLen >= 1 ) glEnable(GL_LIGHT0);
-	if( lListLen >= 2 ) glEnable(GL_LIGHT1);
-	if( lListLen >= 3 ) glEnable(GL_LIGHT2);
-	if( lListLen >= 4 ) glEnable(GL_LIGHT3);
-	if( lListLen >= 5 ) glEnable(GL_LIGHT4);
-	if( lListLen >= 6 ) glEnable(GL_LIGHT5);
-	if( lListLen >= 7 ) glEnable(GL_LIGHT6);
-	if( lListLen >= 8 ) glEnable(GL_LIGHT7);
+	for (int i = 0; i < MAX_NUM_LIGHTS; i++) {
+		if (lListLen > i) glEnable(LIGHT_CONSTS[i]);
+		else glDisable(LIGHT_CONSTS[i]);
+	}
 }
 
 /**
  * updateLights updates the OpenGL lights; this should be run for each render.
  */
-void RenderMan::updateLights()
+void RenderMan::updateGlLightSpecs()
 {
-	int lightFlag = GL_LIGHT0;
 	for(int i = 0; i < lListLen; i++)
 	{
-		glLightfv(lightFlag,GL_AMBIENT,lightList[i]->getAmbient()->getData());
-		glLightfv(lightFlag,GL_DIFFUSE,lightList[i]->getDiffuse()->getData());
-		glLightfv(lightFlag,GL_SPECULAR,lightList[i]->getSpecular()->getData());
-		glLightfv(lightFlag,GL_POSITION,lightList[i]->getPosition()->getArray()); // direction for directional light
-		glLightf(lightFlag, GL_CONSTANT_ATTENUATION, lightList[i]->getAttenuation(0));
-        glLightf(lightFlag, GL_LINEAR_ATTENUATION, lightList[i]->getAttenuation(1));
-        glLightf(lightFlag, GL_QUADRATIC_ATTENUATION, lightList[i]->getAttenuation(2));
+		glLightfv(LIGHT_CONSTS[i],GL_AMBIENT,lightList[i]->getAmbient()->getData());
+		glLightfv(LIGHT_CONSTS[i],GL_DIFFUSE,lightList[i]->getDiffuse()->getData());
+		glLightfv(LIGHT_CONSTS[i],GL_SPECULAR,lightList[i]->getSpecular()->getData());
+		glLightfv(LIGHT_CONSTS[i],GL_POSITION,lightList[i]->getPosition()->getArray()); // direction for directional light
+		glLightf(LIGHT_CONSTS[i],GL_CONSTANT_ATTENUATION, lightList[i]->getAttenuation(0));
+        glLightf(LIGHT_CONSTS[i],GL_LINEAR_ATTENUATION, lightList[i]->getAttenuation(1));
+        glLightf(LIGHT_CONSTS[i],GL_QUADRATIC_ATTENUATION, lightList[i]->getAttenuation(2));
 
 		if(lightList[i]->getLightType() == 3)
 		{
-			glLightfv(lightFlag,GL_SPOT_DIRECTION,lightList[i]->getDirection()->getArray());
-			glLightf(lightFlag,GL_SPOT_EXPONENT,lightList[i]->getExponent());
-			glLightf(lightFlag,GL_SPOT_CUTOFF,lightList[i]->getCutoff());
+			glLightfv(LIGHT_CONSTS[i],GL_SPOT_DIRECTION,lightList[i]->getDirection()->getArray());
+			glLightf(LIGHT_CONSTS[i],GL_SPOT_EXPONENT,lightList[i]->getExponent());
+			glLightf(LIGHT_CONSTS[i],GL_SPOT_CUTOFF,lightList[i]->getCutoff());
 		}
-
-		lightFlag += 1; //Go to the next light.
 	}
 }

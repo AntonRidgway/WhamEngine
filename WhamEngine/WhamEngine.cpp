@@ -5,8 +5,8 @@
 #include "stdafx.h"
 #include "WhamEngine.h"
 #include "RenderMan.h"
-#include "filesys/FileSystemMan.h"
 #include "input/InputMan.h"
+#include "resources/ResourceMan.h"
 #include "scene/StateMan.h"
 #include <string>
 #include <gl/freeglut.h>
@@ -31,15 +31,15 @@ int main(int argc, char **argv) {
 	// Start main program components and register callbacks.
 	InputMan::getInstance().startUp();
 	StateMan::getInstance().startUp(windowWidth,windowHeight);
-	FileSystemMan::getInstance().startUp();
-	FileSystemMan::getInstance().loadLevel(roomFile, StateMan::getInstance().getScene());
+	ResourceMan::getInstance().startUp();
+	ResourceMan::getInstance().loadLevel(roomFile, StateMan::getInstance().getScene());
 	RenderMan::getInstance().startUp(windowWidth,windowHeight);
 
 	glutMainLoop(); // enter GLUT event processing cycle
 
 	//Shut down components in reverse order.
 	RenderMan::getInstance().shutDown();
-	FileSystemMan::getInstance().shutDown();
+	ResourceMan::getInstance().shutDown();
 	StateMan::getInstance().shutDown();
 	InputMan::getInstance().shutDown();
 	

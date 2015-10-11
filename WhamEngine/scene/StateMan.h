@@ -1,10 +1,10 @@
 #ifndef WE_STATEMAN_H
 #define WE_STATEMAN_H
 
-#include <chrono>
 #include <list>
 #include <thread>
 #include "Camera.h"
+#include "Clock.h"
 #include "input/Command.h"
 #include "input/InputMan.h"
 #include "physics/PhysicsMan.h"
@@ -17,12 +17,17 @@ private:
 	StateMan(StateMan const&) = delete; //Disallow the copy constructor.
 	void operator=(StateMan const&) = delete; //Disallow copies of the singleton.
 
-	std::chrono::high_resolution_clock::time_point lastUpdateTime;
+	Clock* myClock;
 	Camera* myCam;
 	float playerMoveSpeed; //units-per-second
 	float playerTurnSpeed; //units-per-second
 	Scene* myScene;
 	float currentFPS;
+
+	//Set up FPS Debug text.
+	bool debugText;
+	HUDText* FPSCounter;
+
 	void updateControl(double secsPassed);
 	void updatePhysics(double secsPassed);
 public:

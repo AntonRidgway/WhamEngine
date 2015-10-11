@@ -13,9 +13,9 @@ Scene::Scene()
 }
 Scene::~Scene()
 {
-	//delete[] lightEList;
-	//delete[] hudEList;
-	//delete[] sceneEList;
+	delete[] lightEList;
+	delete[] hudEList;
+	delete[] sceneEList;
 }
 
 //-------------------------------------------------------------------------------------------------

@@ -160,9 +160,6 @@ xcopy /y "$(SolutionDir)assets\*.*" "$(OutDir)"</Command>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="filesys\DblStackAllocator.h" />
-    <ClInclude Include="filesys\FileSystemMan.h" />
-    <ClInclude Include="filesys\PoolAllocator.h" />
     <ClInclude Include="input\Command.h" />
     <ClInclude Include="input\ForwardCommand.h" />
     <ClInclude Include="input\InputMan.h" />
@@ -184,8 +181,11 @@ xcopy /y "$(SolutionDir)assets\*.*" "$(OutDir)"</Command>
     <ClInclude Include="physics\PhysicsMan.h" />
     <ClInclude Include="RenderMan.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="resources\DblStackAllocator.h" />
     <ClInclude Include="resources\LoadedGeometry.h" />
     <ClInclude Include="resources\Material.h" />
+    <ClInclude Include="resources\PoolAllocator.h" />
+    <ClInclude Include="resources\ResourceMan.h" />
     <ClInclude Include="resources\Texture.h" />
     <ClInclude Include="scene\animation\AnimChannel.h" />
     <ClInclude Include="scene\animation\AnimClip.h" />
@@ -211,7 +211,6 @@ xcopy /y "$(SolutionDir)assets\*.*" "$(OutDir)"</Command>
     <ClInclude Include="WhamEngine.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="filesys\FileSystemMan.cpp" />
     <ClCompile Include="input\ForwardCommand.cpp" />
     <ClCompile Include="input\InputMan.cpp" />
     <ClCompile Include="input\PitchCommand.cpp" />
@@ -230,6 +229,7 @@ xcopy /y "$(SolutionDir)assets\*.*" "$(OutDir)"</Command>
     <ClCompile Include="RenderMan.cpp" />
     <ClCompile Include="resources\LoadedGeometry.cpp" />
     <ClCompile Include="resources\Material.cpp" />
+    <ClCompile Include="resources\ResourceMan.cpp" />
     <ClCompile Include="resources\Texture.cpp" />
     <ClCompile Include="scene\animation\AnimChannel.cpp" />
     <ClCompile Include="scene\animation\AnimClip.cpp" />
