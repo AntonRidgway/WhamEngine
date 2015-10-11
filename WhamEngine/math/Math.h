@@ -10,6 +10,9 @@
 template <class Real> class Math
 {
 public:
+	static Real Abs(Real val) {
+		return abs(val);
+	}
 	static Real ACos(Real val) {
 		return acos(val);
 	}
@@ -31,11 +34,11 @@ public:
 	static Real Exp(Real val) {
 		return exp(val);
 	}
-	static Real Abs(Real val) {
-		return abs(val);
-	}
 	static Real Floor(Real val) {
 		return floor(val);
+	}
+	static Real Fmod(Real val1, Real val2) {
+		return fmod(val1, val2);
 	}
 	static Real Log(Real val) {
 		return log(val);

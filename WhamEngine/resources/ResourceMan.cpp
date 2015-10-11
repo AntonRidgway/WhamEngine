@@ -11,6 +11,7 @@ void ResourceMan::startUp()
 	loadTexture("blank.bmp");
 	loadTexture("brick.bmp");
 	loadTexture("carpet.bmp");
+
 	loadTexture("eyeball.bmp");
 	loadTexture("sky.bmp");
 	loadTexture("wall.bmp");
@@ -151,7 +152,7 @@ void ResourceMan::loadLevel(std::string roomFile, Scene* scene)
 	scene->addSceneE(loadedGeom);
 	loadedGeom->translateY(-1.5);
 	loadedGeom->rotateX(1.7);
-	loadedGeom->setScale(0.1f);
+	loadedGeom->setScale(0.01f);
 
 	std::string sinbadPath = findFileAbsolute("Sinbad.3ds");
 	LoadMesh(sinbadPath.c_str(), loadedGeom);
@@ -247,13 +248,13 @@ bool ResourceMan::LoadMesh(const char* filename, LoadedGeometry*& meshOut)
 	//If the file could not be read, generate an error.
 	if (!myScene)
 	{
-		MessageBox(NULL, L"Error: could not load scene.", L"LoadGeometry Error", MB_OK | MB_ICONINFORMATION);
+		MessageBox(NULL, L"Error: could not loaded mesh.", L"LoadGeometry Error", MB_OK | MB_ICONINFORMATION);
 		printf("Error: could not load scene '%s': %s\n", filename, myImp.GetErrorString());
 		return FALSE;
 	}
 	if (!myScene->HasMeshes())
 	{
-		MessageBox(NULL, L"Error: no meshes in scene.", L"LoadGeometry Error", MB_OK | MB_ICONINFORMATION);
+		MessageBox(NULL, L"Error: no meshes in loaded mesh file.", L"LoadGeometry Error", MB_OK | MB_ICONINFORMATION);
 		printf("Error: No meshes in scene '%s': %s\n", filename, myImp.GetErrorString());
 		return FALSE;
 	}
@@ -264,6 +265,10 @@ bool ResourceMan::LoadMesh(const char* filename, LoadedGeometry*& meshOut)
 		aiGIT.b1, aiGIT.b2, aiGIT.b3, aiGIT.b4,
 		aiGIT.c1, aiGIT.c2, aiGIT.c3, aiGIT.c4,
 		aiGIT.d1, aiGIT.d2, aiGIT.d3, aiGIT.d4);
+	/*Matrix44f* gIT = new Matrix44f(aiGIT.a1, aiGIT.b1, aiGIT.c1, aiGIT.d1,
+		aiGIT.a2, aiGIT.b2, aiGIT.c2, aiGIT.d2,
+		aiGIT.a3, aiGIT.b3, aiGIT.c3, aiGIT.d3,
+		aiGIT.a4, aiGIT.b4, aiGIT.c4, aiGIT.d4);*/
 
 	//make structures for important data
 	unsigned int numMeshes = myScene->mNumMeshes;			//Triangle Meshes
@@ -281,9 +286,9 @@ bool ResourceMan::LoadMesh(const char* filename, LoadedGeometry*& meshOut)
 	{
 		const aiMesh* myAiMesh = myScene->mMeshes[i];
 
-		ai_assert(myAiMesh->HasPositions());
-		ai_assert(myAiMesh->HasNormals());
-		ai_assert(myAiMesh->HasFaces());
+		assert(myAiMesh->HasPositions());
+		assert(myAiMesh->HasNormals());
+		assert(myAiMesh->HasFaces());
 
 		GLfloat* posIn = new GLfloat[myAiMesh->mNumVertices * 3];
 		GLfloat* normIn = new GLfloat[myAiMesh->mNumVertices * 3];
@@ -315,7 +320,7 @@ bool ResourceMan::LoadMesh(const char* filename, LoadedGeometry*& meshOut)
 		for (unsigned int j = 0; j < myAiMesh->mNumFaces; j++)
 		{
 			const aiFace myFace = myAiMesh->mFaces[j];
-			ai_assert(myFace.mNumIndices == 3);
+			assert(myFace.mNumIndices == 3);
 			indIn[j * 3] = myFace.mIndices[0];
 			indIn[j * 3 + 1] = myFace.mIndices[1];
 			indIn[j * 3 + 2] = myFace.mIndices[2];
@@ -327,7 +332,7 @@ bool ResourceMan::LoadMesh(const char* filename, LoadedGeometry*& meshOut)
 		Bone** bonesIn = new Bone*[myAiMesh->mNumBones];							//bones
 		VertexBoneInfo* boneInfoIn = new VertexBoneInfo[myAiMesh->mNumVertices];	//bone weights
 
-																					//Set up a mapping to interpret Assimp's bone organization
+		//Set up a mapping to interpret Assimp's bone organization
 		std::string* boneMappingNames = new std::string[myAiMesh->mNumBones];
 		int* boneMappingIDs = new int[myAiMesh->mNumBones];
 		int spotsFilled = 0;
@@ -340,18 +345,15 @@ bool ResourceMan::LoadMesh(const char* filename, LoadedGeometry*& meshOut)
 			//See if the current Bone is already there
 			int index = 0;
 			std::string boneName(myAiMesh->mBones[j]->mName.C_Str());
-			while (index < spotsFilled && boneMappingNames[index] != boneName)
-			{
+			while (index < spotsFilled && boneMappingNames[index] != boneName) {
 				index++;
 			}
-			if (index == spotsFilled) //This is a new bone; make a new entry.
-			{
+			if (index == spotsFilled) { //This is a new bone; make a new entry.
 				currBoneIndex = spotsFilled; //index of the last open spot
 				spotsFilled++;
 				bonesIn[index] = new Bone();
 			}
-			else // The bone is already present
-			{
+			else { // The bone is already present
 				currBoneIndex = index;
 			}
 			boneMappingIDs[currBoneIndex] = currBoneIndex;
@@ -359,13 +361,10 @@ bool ResourceMan::LoadMesh(const char* filename, LoadedGeometry*& meshOut)
 			//Copy bone name and orientation
 			bonesIn[currBoneIndex]->setName(myAiMesh->mBones[j]->mName.C_Str());
 			aiMatrix4x4 currMat = myAiMesh->mBones[j]->mOffsetMatrix;
-			float* matA = new float[16];
-			matA[0] = currMat.a1;	matA[0] = currMat.b1;	matA[0] = currMat.c1;	matA[0] = currMat.d1;
-			matA[4] = currMat.a2;	matA[0] = currMat.b2;	matA[0] = currMat.c2;	matA[0] = currMat.d2;
-			matA[8] = currMat.a3;	matA[0] = currMat.b3;	matA[0] = currMat.c3;	matA[0] = currMat.d3;
-			matA[12] = currMat.a4;	matA[0] = currMat.b4;	matA[0] = currMat.c4;	matA[0] = currMat.d4;
-			bonesIn[currBoneIndex]->setTransformation(matA);
-			delete[] matA;
+			bonesIn[currBoneIndex]->setTransformation(currMat.a1, currMat.a2, currMat.a3, currMat.a4,
+				currMat.b1, currMat.b2, currMat.b3, currMat.b4,
+				currMat.c1, currMat.c2, currMat.c3, currMat.c4,
+				currMat.d1, currMat.d2, currMat.d3, currMat.d4);
 
 			//Get the bone weights per vertex
 			for (unsigned int k = 0; k < myAiMesh->mBones[j]->mNumWeights; k++)
@@ -380,7 +379,7 @@ bool ResourceMan::LoadMesh(const char* filename, LoadedGeometry*& meshOut)
 		meshesIn[i] = newMesh;
 		newMesh->setMatIndex(myAiMesh->mMaterialIndex);
 		newMesh->setVBI(boneInfoIn);
-		newMesh->setBones(bonesIn, myAiMesh->mNumBones);
+		//newMesh->setBones(bonesIn, myAiMesh->mNumBones);
 	}
 
 	//---------------------------------------------------------------------------------------------
@@ -419,9 +418,8 @@ bool ResourceMan::LoadMesh(const char* filename, LoadedGeometry*& meshOut)
 				}
 				else texturesIn[i] = loadTexture("blank.bmp");
 			}
-			else
-			{
-				texturesIn[i] = loadTexture("sinbad_body.bmp");
+			else {
+				texturesIn[i] = loadTexture("blank.bmp");
 			}
 
 			aiColor3D emiIn, ambIn, difIn, speIn;
@@ -463,7 +461,7 @@ bool ResourceMan::LoadMesh(const char* filename, LoadedGeometry*& meshOut)
 		{
 			aiAnimation* currAnim = myScene->mAnimations[i];
 			AnimChannel** channelsIn = new AnimChannel*[currAnim->mNumChannels];
-			//Get the animation for each channel (that is, each bone)
+			//Get the animation for each bone channel
 			for (unsigned int j = 0; j < currAnim->mNumChannels; j++)
 			{
 				aiNodeAnim* currChannel = currAnim->mChannels[j];
@@ -534,9 +532,8 @@ bool ResourceMan::LoadMesh(const char* filename, LoadedGeometry*& meshOut)
 	}
 	else
 	{
-		numAnimations = 1;
-		animationsIn = new AnimClip*[1];
-		animationsIn[0] = new AnimClip();
+		numAnimations = 0;
+		animationsIn = NULL;
 	}
 
 	//Get the root-node skeleton
@@ -553,7 +550,7 @@ bool ResourceMan::LoadMesh(const char* filename, LoadedGeometry*& meshOut)
 }
 
 /*
-* buildSkeleton recursively traverses the aiScene's node structure and converts
+* buildSceneGraph recursively traverses the aiScene's node structure and converts
 * it to a local format.
 */
 void ResourceMan::buildSkeleton(aiNode* currAiNode, Bone* currBone, Bone** bonePile, int& countBones)
@@ -561,14 +558,14 @@ void ResourceMan::buildSkeleton(aiNode* currAiNode, Bone* currBone, Bone** boneP
 	currBone->setName(currAiNode->mName.C_Str());
 
 	aiMatrix4x4 currMat = currAiNode->mTransformation;
-
-	float* matA = new float[16];
-	matA[0] = currMat.a1;	matA[0] = currMat.b1;	matA[0] = currMat.c1;	matA[0] = currMat.d1;
-	matA[4] = currMat.a2;	matA[0] = currMat.b2;	matA[0] = currMat.c2;	matA[0] = currMat.d2;
-	matA[8] = currMat.a3;	matA[0] = currMat.b3;	matA[0] = currMat.c3;	matA[0] = currMat.d3;
-	matA[12] = currMat.a4;	matA[0] = currMat.b4;	matA[0] = currMat.c4;	matA[0] = currMat.d4;
-	currBone->setTransformation(matA);
-
+	//currBone->setTransformation(currMat.a1, currMat.b1, currMat.c1, currMat.d1,
+	//							currMat.a2, currMat.b2, currMat.c2, currMat.d2,
+	//							currMat.a3, currMat.b3, currMat.c3, currMat.d3,
+	//							currMat.a4, currMat.b4, currMat.c4, currMat.d4);
+	currBone->setTransformation(currMat.a1, currMat.a2, currMat.a3, currMat.a4,
+							currMat.b1, currMat.b2, currMat.b3, currMat.b4,
+							currMat.c1, currMat.c2, currMat.c3, currMat.c4,
+							currMat.d1, currMat.d2, currMat.d3, currMat.d4);
 	countBones++;
 
 	//build skeleton recursively

@@ -18,6 +18,8 @@ Bone::Bone( Bone* parentIn )
 }
 Bone::~Bone()
 {
+	if (animTransform != NULL)
+		delete animTransform;
 }
 void Bone::attachChild( Bone* b )
 {
@@ -46,11 +48,13 @@ void Bone::setParent( Bone* b )
 }*/
 Bone* Bone::getChild( unsigned int index ) const
 {
-	if(index >= 0 && index < children.size())
-	{
+	if(index >= 0 && index < children.size()) {
 		return children[index];
 	}
 	return NULL;
+}
+int Bone::getNumChildren() const {
+	return children.size();
 }
 void Bone::setMIndex( int i, unsigned int val )
 {
@@ -62,7 +66,8 @@ unsigned int Bone::getMIndex( int i ) const
 }
 void Bone::setAnimTransform( Matrix44f* transIn )
 {
-	if(animTransform != NULL) delete animTransform;
+	if(animTransform != NULL)
+		delete animTransform;
 	animTransform = transIn;
 }
 Matrix44f* Bone::getAnimTransform()

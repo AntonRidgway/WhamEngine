@@ -120,27 +120,27 @@ VertexBoneInfo* TriMesh::getVBI()
 {
 	return vBIs;
 }
-void TriMesh::setBones( Bone** bonesIn, int nB )
-{
-	bones = bonesIn;
-	numBones = nB;
-}
-Bone** TriMesh::getBones()
-{
-	return bones;
-}
-Bone* TriMesh::getBone(int i)
-{
-	if (i >= 0 && i < numBones)
-		return bones[i];
-	return NULL;
-}
-Bone* TriMesh::getBone(std::string boneName)
-{
-	for(int i = 0; i < numBones; i++)
-	{
-		if(bones[i]->getName() == boneName)
-			return bones[i];
-	}
-	return NULL;
-}
+//void TriMesh::setBones( Bone** bonesIn, int nB )
+//{
+//	bones = bonesIn;
+//	numBones = nB;
+//}
+//Bone** TriMesh::getBones()
+//{
+//	return bones;
+//}
+//Bone* TriMesh::getBone(int i)
+//{
+//	if (i >= 0 && i < numBones)
+//		return bones[i];
+//	return NULL;
+//}
+//Bone* TriMesh::getBone(std::string boneName)
+//{
+//	for(int i = 0; i < numBones; i++)
+//	{
+//		if(bones[i]->getName() == boneName)
+//			return bones[i];
+//	}
+//	return NULL;
+//}

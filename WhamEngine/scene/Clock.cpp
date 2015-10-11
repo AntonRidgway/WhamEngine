@@ -2,7 +2,13 @@
 #include "Clock.h"
 
 Clock::Clock(float scaleIn, bool pausedIn) : timeScale(scaleIn), paused(pausedIn) {
-	lastUpdateTime = std::chrono::high_resolution_clock::now();
+	startTime = std::chrono::high_resolution_clock::now();
+	lastUpdateTime = startTime;
+}
+float Clock::getTimeSinceStartTime() {
+	std::chrono::high_resolution_clock::time_point currTime = std::chrono::high_resolution_clock::now();
+	float secs = (std::chrono::duration_cast<std::chrono::nanoseconds>(currTime - startTime).count()) / 1000000000.;
+	return secs*timeScale;
 }
 float Clock::getTimeSinceLastCall() {
 	if(!paused) {

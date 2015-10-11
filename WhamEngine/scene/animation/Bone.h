@@ -21,6 +21,7 @@ public:
 	void setParent( Bone* b );
 	//Bone* getChild( std::string boneName ) const;
 	Bone* getChild( unsigned int index ) const;
+	int getNumChildren() const;
 	void setMIndex( int i, unsigned int val );
 	unsigned int getMIndex( int i ) const;
 	void addNumMIndices( int i );

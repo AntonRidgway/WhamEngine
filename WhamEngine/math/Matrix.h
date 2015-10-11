@@ -14,6 +14,7 @@ private:
 	bool detInit;			//flag: has the determinant been found?
 	bool invInit;			//flag: has the inverse been found?
 public:
+	const static Matrix22 identity;
 	Matrix22() {}
 	Matrix22( Real a, Real b, Real c, Real d )
 	{
@@ -184,6 +185,7 @@ private:
 	bool detInit;			//flag: has the determinant been found?
 	bool invInit;			//flag: has the inverse been found?
 public:
+	const static Matrix33 identity;
 	Matrix33() {}
 	Matrix33( Real d00, Real d01, Real d02,
 			  Real d10, Real d11, Real d12,
@@ -388,6 +390,7 @@ private:
 	bool detInit;			//flag: has the determinant been found?
 	bool invInit;			//flag: has the inverse been found?
 public:
+	const static Matrix44 identity;
 	Matrix44() {}
 	Matrix44( Real d00, Real d01, Real d02, Real d03,
 			  Real d10, Real d11, Real d12, Real d13,
@@ -456,8 +459,7 @@ public:
 		{
 			dataNew[i] = data[i] - bArray[i];
 		}
-		Matrix44 mNew( dataNew );
-		return mNew;
+		return dataNew;
 	}
 	Matrix44<Real> multiply( const Real s )
 	{
@@ -495,8 +497,7 @@ public:
 				dataNew[i][j] = runSum;
 			}
 		}
-		Matrix44<Real> newMat(dataNew);
-		return newMat;
+		return dataNew;
 	}
 	void multiplyIn( Matrix44<Real> b )
 	{
@@ -585,5 +586,12 @@ typedef Matrix33<float> Matrix33f;
 typedef Matrix33<double> Matrix33d;
 typedef Matrix44<float> Matrix44f;
 typedef Matrix44<double> Matrix44d;
+
+const Matrix22f Matrix22f::identity = Matrix22f(1.0f, 0.0f, 0.0f, 1.0f);
+const Matrix33f Matrix33f::identity = Matrix33f(1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f);
+const Matrix44f Matrix44f::identity = Matrix44f(1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f);
+const Matrix22d Matrix22d::identity = Matrix22d(1.0, 0.0, 0.0, 1.0);
+const Matrix33d Matrix33d::identity = Matrix33d(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0);
+const Matrix44d Matrix44d::identity = Matrix44d(1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0);
 
 #endif

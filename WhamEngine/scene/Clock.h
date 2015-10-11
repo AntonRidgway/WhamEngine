@@ -10,11 +10,13 @@
 class Clock
 {
 private:
+	std::chrono::high_resolution_clock::time_point startTime;
 	std::chrono::high_resolution_clock::time_point lastUpdateTime;
 	float timeScale;
 	bool paused;
 public:
 	Clock(float scaleIn = 1.0f, bool pausedIn = false);
+	float getTimeSinceStartTime();
 	float getTimeSinceLastCall();
 	void setPaused(bool val);
 	bool isPaused() const;

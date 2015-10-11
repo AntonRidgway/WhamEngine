@@ -9,7 +9,7 @@ class AnimClip
 private:
 	const char* myName;
 	float duration;
-	float tps;
+	float tps; //Animaiton ticks-per-second
 	bool isLooping;
 
 	AnimChannel** channels;

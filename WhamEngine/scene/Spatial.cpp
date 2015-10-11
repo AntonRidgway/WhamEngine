@@ -182,6 +182,7 @@ void Spatial::setTransformation(Matrix44f m) {
 	Matrix44f translationMat = rotation.transpose().multiply(m);
 	for (int i = 0; i < 3; i++)
 		translation.setEntry(i, translationMat.getEntry(3,i));
+	//TODO: This doesn't account for scale!
 }
 void Spatial::setTransformation(float a1, float a2, float a3, float a4,
 	float b1, float b2, float b3, float b4,

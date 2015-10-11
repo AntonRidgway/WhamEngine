@@ -32,8 +32,8 @@ public:
 	AnimChannel( const char* nName, int prS, int poS, Vector3f** pK, Quaternionf** rK, float* sK, float* pT, float* rT, float* sT, unsigned int nP, unsigned int nR, unsigned int nS );
 	~AnimChannel();
 	std::string getNodeName();
-	Matrix44f* getPosition( float time );
-	Matrix44f* getRotation( float time );
+	Matrix44f getPosition( float time );
+	Matrix44f getRotation( float time );
 	float getScale( float time );
 };
 
