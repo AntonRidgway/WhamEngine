@@ -23,18 +23,18 @@ private:
 
 	Vector3f** positionKeys;
 	Quaternionf** rotationKeys;
-	float* scaleKeys;
+	Vector3f** scaleKeys;
 	float* pKeyTimes;
 	float* rKeyTimes;
 	float* sKeyTimes;
 	int numPKeys, numRKeys, numSKeys;
 public:
-	AnimChannel( const char* nName, int prS, int poS, Vector3f** pK, Quaternionf** rK, float* sK, float* pT, float* rT, float* sT, unsigned int nP, unsigned int nR, unsigned int nS );
+	AnimChannel( const char* nName, int prS, int poS, Vector3f** pK, Quaternionf** rK, Vector3f** sK, float* pT, float* rT, float* sT, unsigned int nP, unsigned int nR, unsigned int nS );
 	~AnimChannel();
 	std::string getNodeName();
 	Matrix44f getPosition( float time );
 	Matrix44f getRotation( float time );
-	float getScale( float time );
+	Vector3f getScale( float time );
 };
 
 #endif

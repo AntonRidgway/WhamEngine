@@ -30,8 +30,8 @@ class InputMan
 		InputMan() {} //Make constructor private.
 		InputMan(InputMan const&) = delete; //Disallow the copy constructor.
 		void operator=(InputMan const&) = delete; //Disallow copies of the singleton.
-		const float playerMoveSpeed = 0.02f;
-		const float playerTurnSpeed = 0.004f;
+		const float playerMoveSpeed = 0.2f;
+		const float playerTurnSpeed = 0.04f;
 };
 
 #endif

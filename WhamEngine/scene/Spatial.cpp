@@ -5,8 +5,8 @@
 Spatial::Spatial(std::string nameIn) :
 	translation(0.0f, 0.0f, 0.0f),
 	rotation(1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f),
-	scale(1.0f), name(nameIn) {};
-Spatial::Spatial(Vector3f translationIn, Matrix44f rotationIn, float scaleIn, std::string nameIn ) :
+	scale(1.0f,1.0f,1.0f), name(nameIn) {};
+Spatial::Spatial(Vector3f translationIn, Matrix44f rotationIn, Vector3f scaleIn, std::string nameIn ) :
 	translation(translationIn), rotation(rotationIn), scale(scaleIn), name(nameIn) {};
 Spatial::Spatial(Spatial& s) :
 	translation(s.getTranslation()), rotation(s.getRotation()), scale(s.getScale()), name(s.getName()) {};
@@ -39,11 +39,7 @@ void Spatial::rotate(Quaternionf q) {
 }
 void Spatial::rotate( float w, float x, float y, float z )
 {
-	Matrix44f rotMat(	1-2*(y*y-z*z),	2*(x*y+w*z),	2*(x*z-w*y),	0,
-						2*(x*y-w*z),	1-2*(x*x-z*z),	2*(y*z-w*x),	0,
-						2*(x*z+w*y),	2*(y*z-w*z),	1-2*(x*x-y*y),	0,
-						0,				0,				0,				1);
-	rotation.multiplyIn(rotMat);
+	rotation.multiplyIn(Quaternionf(w, x, y, z).toMatrix());
 }
 void Spatial::rotateX( float amt )
 {
@@ -107,7 +103,7 @@ void Spatial::roll(float f) {
 	Vector3f newUp(temp1);
 }
 void Spatial::scaleBy(float f) {
-	scale *= f;
+	scale.multiplyIn(f);
 }
 
 
@@ -118,15 +114,15 @@ Matrix44f Spatial::getRotation() {
 	return rotation;
 }
 Matrix44f Spatial::getTransformation() {
-	return Matrix44f(rotation.getEntry(0, 0)*scale, rotation.getEntry(0, 1), rotation.getEntry(0, 2), 
-						rotation.getEntry(0, 0)*translation.getEntry(0)*scale + rotation.getEntry(0, 1)*translation.getEntry(1)
+	return Matrix44f(rotation.getEntry(0, 0)*scale.getEntry(0), rotation.getEntry(0, 1), rotation.getEntry(0, 2), 
+						rotation.getEntry(0, 0)*translation.getEntry(0)*scale.getEntry(0) + rotation.getEntry(0, 1)*translation.getEntry(1)
 						+ rotation.getEntry(0, 2)*translation.getEntry(2),
-					rotation.getEntry(1, 0), rotation.getEntry(1, 1)*scale, rotation.getEntry(1, 2),
-						rotation.getEntry(1, 0)*translation.getEntry(0) + rotation.getEntry(1, 1)*translation.getEntry(1)*scale
+					rotation.getEntry(1, 0), rotation.getEntry(1, 1)*scale.getEntry(1), rotation.getEntry(1, 2),
+						rotation.getEntry(1, 0)*translation.getEntry(0) + rotation.getEntry(1, 1)*translation.getEntry(1)*scale.getEntry(1)
 						+ rotation.getEntry(1, 2)*translation.getEntry(2),
-					rotation.getEntry(2, 0), rotation.getEntry(2, 1), rotation.getEntry(2, 2)*scale,
+					rotation.getEntry(2, 0), rotation.getEntry(2, 1), rotation.getEntry(2, 2)*scale.getEntry(2),
 						rotation.getEntry(2, 0)*translation.getEntry(0) + rotation.getEntry(2, 1)*translation.getEntry(1)
-						+ rotation.getEntry(2, 2)*translation.getEntry(2)*scale,
+						+ rotation.getEntry(2, 2)*translation.getEntry(2)*scale.getEntry(2),
 					0.0f, 0.0f, 0.0f, 1.0f );
 }
 Vector3f Spatial::getForward() {
@@ -141,7 +137,7 @@ Vector3f Spatial::getRight() {
 	//return Vector3f(rotation.getEntry(0, 0), rotation.getEntry(0, 1), rotation.getEntry(0, 2));
 	return Vector3f(rotation.getEntry(0, 0), rotation.getEntry(1, 0), rotation.getEntry(2, 0));
 }
-float Spatial::getScale() {
+Vector3f Spatial::getScale() {
 	return scale;
 }
 std::string Spatial::getName() const {
@@ -162,9 +158,10 @@ void Spatial::setRotation(Quaternionf q) {
 }
 void Spatial::setRotation( float w, float x, float y, float z )
 {
-	rotation.setEntry(0,0,1-2*(y*y-z*z));	rotation.setEntry(0,1,2*(x*y+w*z));		rotation.setEntry(0,2,2*(x*z-w*y));
-	rotation.setEntry(1,0,2*(x*y-w*z));		rotation.setEntry(1,1,1-2*(x*x-z*z));	rotation.setEntry(1,2,2*(y*z+w*x));
-	rotation.setEntry(2,0,2*(x*z+w*y));		rotation.setEntry(2,1,2*(y*z-x*w));		rotation.setEntry(2,2,1-2*(x*x-y*y));
+	Matrix44f rotMat(Quaternionf(w, x, y, z).toMatrix());
+	setRotation(rotMat.getEntry(0, 0), rotMat.getEntry(0, 1), rotMat.getEntry(0, 2), 
+			rotMat.getEntry(1, 0), rotMat.getEntry(1, 1), rotMat.getEntry(1, 2), 
+			rotMat.getEntry(2, 0), rotMat.getEntry(2, 1), rotMat.getEntry(2, 2));
 }
 
 void Spatial::setRotation( float a1, float a2, float a3,
@@ -175,21 +172,21 @@ void Spatial::setRotation( float a1, float a2, float a3,
 	rotation.setEntry(1,0,b1);	rotation.setEntry(1,1,b2);	rotation.setEntry(1,2,b3);
 	rotation.setEntry(2,0,c1);	rotation.setEntry(2,1,c2);	rotation.setEntry(2,2,c3);
 }
-void Spatial::setTransformation(Matrix44f m) {
-	for (int i = 0; i < 3; i++)
-		for (int j = 0; j < 3; j++)
-			rotation.setEntry(i, j, m.getEntry(i, j));
-	Matrix44f translationMat = rotation.transpose().multiply(m);
-	for (int i = 0; i < 3; i++)
-		translation.setEntry(i, translationMat.getEntry(3,i));
-	//TODO: This doesn't account for scale!
-}
-void Spatial::setTransformation(float a1, float a2, float a3, float a4,
-	float b1, float b2, float b3, float b4,
-	float c1, float c2, float c3, float c4,
-	float d1, float d2, float d3, float d4) {
-	setTransformation(Matrix44f(a1,a2,a3,a4,b1,b2,b3,b4,c1,c2,c3,c4,d1,d2,d3,d4));
-}
+//void Spatial::setTransformation(Matrix44f m) {
+//	for (int i = 0; i < 3; i++)
+//		for (int j = 0; j < 3; j++)
+//			rotation.setEntry(i, j, m.getEntry(i, j));
+//	Matrix44f translationMat = rotation.transpose().multiply(m);
+//	for (int i = 0; i < 3; i++)
+//		translation.setEntry(i, translationMat.getEntry(3,i));
+//	//TODO: This doesn't account for scale!
+//}
+//void Spatial::setTransformation(float a1, float a2, float a3, float a4,
+//	float b1, float b2, float b3, float b4,
+//	float c1, float c2, float c3, float c4,
+//	float d1, float d2, float d3, float d4) {
+//	setTransformation(Matrix44f(a1,a2,a3,a4,b1,b2,b3,b4,c1,c2,c3,c4,d1,d2,d3,d4));
+//}
 
 void Spatial::setYaw(Vector3f newForward, Vector3f newRight) {
 	rotation.setEntry(0, 2, newForward.getEntry(0)); rotation.setEntry(1, 2, newForward.getEntry(1)); rotation.setEntry(2, 2, newForward.getEntry(2)); //forward
@@ -203,8 +200,11 @@ void Spatial::setRoll(Vector3f newUp, Vector3f newRight) {
 	rotation.setEntry(0, 1, newUp.getEntry(0)); rotation.setEntry(1, 1, newUp.getEntry(1)); rotation.setEntry(2, 1, newUp.getEntry(2)); //up
 	rotation.setEntry(0, 0, newRight.getEntry(0)), rotation.setEntry(1, 0, newRight.getEntry(1)), rotation.setEntry(2, 0, newRight.getEntry(2)); //right
 }
-void Spatial::setScale( float scaleIn) {
+void Spatial::setScale(Vector3f scaleIn) {
 	scale = scaleIn;
+}
+void Spatial::setScale(float sx, float sy, float sz) {
+	scale.setEntry(0, sx); scale.setEntry(1, sy); scale.setEntry(2, sz);
 }
 void Spatial::setName( std::string newName ) {
 	name = newName;

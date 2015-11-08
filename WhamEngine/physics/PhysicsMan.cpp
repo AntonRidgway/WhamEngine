@@ -291,7 +291,7 @@ void PhysicsMan::startUp(Entity** SGEin)
 		if (isDynamic)
 			colShape->calculateLocalInertia(mass,localInertia);
 		startTransform.setOrigin(btVector3(2,5,0));
-		startTransform.setRotation(btQuaternion(0.0f,0.5f,0.7f,0.2f));
+		startTransform.setRotation(btQuaternion(0.0f,2.5f,0.7f,0.2f));
 		//using motionstate is recommended, it provides interpolation capabilities, and only synchronizes 'active' objects
 		btDefaultMotionState* myMotionState = new btDefaultMotionState(startTransform);
 		btRigidBody::btRigidBodyConstructionInfo rbInfo(mass,myMotionState,colShape,localInertia);
@@ -383,11 +383,10 @@ void PhysicsMan::step(double secsPassed)
 			{
 				btTransform trans;
 				body->getMotionState()->getWorldTransform(trans);
-
-				float newRot[16];
-				trans.getOpenGLMatrix(newRot);
-				newRot[15] = 1;
-				currEntity->setTransformation(newRot);
+				btVector3 locVec = trans.getOrigin();
+				btQuaternion rotQuat = trans.getRotation().normalized();
+				currEntity->setTranslation(locVec.getX(), locVec.getY(), locVec.getZ());
+				currEntity->setRotation(rotQuat.getW(), rotQuat.getX(), rotQuat.getY(), rotQuat.getZ());
 			}
 		}
 	}

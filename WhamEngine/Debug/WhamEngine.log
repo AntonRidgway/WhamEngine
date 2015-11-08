@@ -1,8 +1,8 @@
-﻿Build started 10/11/2015 6:15:10 PM.
+﻿Build started 11/7/2015 9:36:56 PM.
      1>Project "D:\Documents\Visual Studio 2015\Projects\WhamEngine\WhamEngine\WhamEngine.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Yu"stdafx.h" /Fp"Debug\WhamEngine.pch" /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt resources\LoadedGeometry.cpp
-         LoadedGeometry.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Yu"stdafx.h" /Fp"Debug\WhamEngine.pch" /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt physics\PhysicsMan.cpp
+         PhysicsMan.cpp
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Documents\Visual Studio 2015\Projects\WhamEngine\Debug\WhamEngine.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib opengl32.lib glu32.lib freeglut.lib release/assimp.lib BulletCollision_vs2010_debug.lib BulletDynamics_vs2010_debug.lib LinearMath_vs2010_debug.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"D:\Documents\Visual Studio 2015\Projects\WhamEngine\Debug\WhamEngine.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /ENTRY:"mainCRTStartup" /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Documents\Visual Studio 2015\Projects\WhamEngine\Debug\WhamEngine.lib" /MACHINE:X86 Debug\WhamEngine.res
          Debug\ForwardCommand.obj
@@ -14,7 +14,6 @@
          Debug\ScaleCommand.obj
          Debug\SetGravityCommand.obj
          Debug\ShootCommand.obj
-         Debug\TransformationCommand.obj
          Debug\TranslationCommand.obj
          Debug\UpCommand.obj
          Debug\YawCommand.obj
@@ -28,6 +27,7 @@
          Debug\AnimChannel.obj
          Debug\AnimClip.obj
          Debug\Bone.obj
+         Debug\Node.obj
          Debug\VertexBoneInfo.obj
          Debug\Camera.obj
          Debug\Clock.obj
@@ -63,14 +63,19 @@
          D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\box.bmp
          D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\brick.bmp
          D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\carpet.bmp
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\dumb.3ds
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\dumb.blend
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\dumb2.blend
          D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\eyeball.bmp
          D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\guard1_body.bmp
          D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\guard1_face.bmp
          D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\guard1_helmet.bmp
          D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\iron_grill.bmp
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\longlegs.blend
          D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\mountain.bmp
          D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\round_grill.bmp
          D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\Sinbad.3ds
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\Sinbad.blend
          D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\sinbad_body.bmp
          D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\sinbad_cloth.bmp
          D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\sinbad_sword.bmp
@@ -79,9 +84,10 @@
          D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\texture.bmp
          D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\wall.bmp
          D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\wallpic.bmp
-         24 File(s) copied
+         D:\Documents\Visual Studio 2015\Projects\WhamEngine\assets\WusonSMD.smd
+         30 File(s) copied
      1>Done Building Project "D:\Documents\Visual Studio 2015\Projects\WhamEngine\WhamEngine\WhamEngine.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:01.31
+Time Elapsed 00:00:01.73

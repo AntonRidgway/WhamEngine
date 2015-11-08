@@ -17,6 +17,7 @@
 #include <fstream>
 #include <streambuf>
 #include "scene/animation/Bone.h"
+#include "scene/animation/Node.h"
 #include <assimp\ai_assert.h>
 #include <assimp\anim.h>
 #include <assimp\Importer.hpp>
@@ -54,7 +55,7 @@ private:
 	bool LoadMesh(const char* filename, LoadedGeometry*& meshOut);
 	Texture* loadTexture(std::string fileName);
 	Texture* loadAssimpTexture(aiTexture texIn);
-	void buildSkeleton(aiNode* currAiNode, Bone* currBone, Bone** bonePile, int& countBones);
+	void buildSceneGraph(aiNode* currAiNode, Node* currNode, Bone** bonesIn, std::map<std::string, int>* boneMap);
 	bool doesFileExist(std::string fileName);
 	std::string findFileAbsolute(std::string fileName);
 	

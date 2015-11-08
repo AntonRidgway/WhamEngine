@@ -7,6 +7,7 @@
 #include "scene/Clock.h"
 #include "scene/animation/AnimClip.h"
 #include "scene/animation/Bone.h"
+#include "scene/animation/Node.h"
 #include "scene/entities/Entity.h"
 #include "scene/entities/TriMesh.h"
 
@@ -17,6 +18,7 @@ private:
 	Texture** myTextures;
 	Material** myMaterials;
 	AnimClip** myAnimations;
+	Node* myGraph;
 	Bone** myBones; //root node at index 0
 	int numMeshes;
 	int numTextures;
@@ -28,10 +30,9 @@ private:
 	AnimClip* currentAnimation;
 
 	void setBoneTransformations(float realTime);
-	void recurseBoneTransformations(float animTime, Bone* currNode, const Matrix44f parentTransform);
-	Quaternionf* interpolateRotation(float animTime, const aiNodeAnim* nodeAnim);
+	void recurseBoneTransformations(float animTime, Node* currNode, const Matrix44f parentTransform);
 public:
-	LoadedGeometry(TriMesh** meshesIn, Texture** texturesIn, Material** materialsIn, AnimClip** animationsIn, Bone** bonesIn,
+	LoadedGeometry(TriMesh** meshesIn, Texture** texturesIn, Material** materialsIn, AnimClip** animationsIn, Node* graphIn, Bone** bonesIn,
 				   int nMe, int nT, int nMa, int nA, int nB, Matrix44f* gitIn);
 	~LoadedGeometry();
 	void renderSpecific();

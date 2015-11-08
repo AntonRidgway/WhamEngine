@@ -74,6 +74,12 @@ Matrix44f* Bone::getAnimTransform()
 {
 	return animTransform;
 }
+void Bone::setInvOffset(Matrix44f* invOffIn) {
+	invOffset = invOffIn;
+}
+Matrix44f* Bone::getInvOffset() {
+	return invOffset;
+}
 void Bone::addNumMIndices( int i )
 {
 	numMIndices += i;

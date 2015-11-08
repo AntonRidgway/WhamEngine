@@ -152,7 +152,8 @@ void ResourceMan::loadLevel(std::string roomFile, Scene* scene)
 	scene->addSceneE(loadedGeom);
 	loadedGeom->translateY(-1.5);
 	loadedGeom->rotateX(1.7);
-	loadedGeom->setScale(0.01f);
+	loadedGeom->rotateY(3.14);
+	loadedGeom->scaleBy(0.1f);
 
 	std::string sinbadPath = findFileAbsolute("Sinbad.3ds");
 	LoadMesh(sinbadPath.c_str(), loadedGeom);
@@ -279,6 +280,10 @@ bool ResourceMan::LoadMesh(const char* filename, LoadedGeometry*& meshOut)
 	Material** materialsIn;
 	unsigned int numAnimations;								//Animations
 	AnimClip** animationsIn;
+	std::vector<Bone*> bonesIn = std::vector<Bone*>();		//Bones
+	std::map<std::string, int> boneMap = std::map<std::string, int>();
+	int numBones = 0;
+	
 
 	//---------------------------------------------------------------------------------------------
 	//Load Meshes
@@ -327,51 +332,58 @@ bool ResourceMan::LoadMesh(const char* filename, LoadedGeometry*& meshOut)
 		}
 
 		//-----------------------------------------------------------------------------------------
-		// Load this mesh's bones
+		// Load this mesh's bones into an overall list. (i.e., not per-mesh)
 
-		Bone** bonesIn = new Bone*[myAiMesh->mNumBones];							//bones
 		VertexBoneInfo* boneInfoIn = new VertexBoneInfo[myAiMesh->mNumVertices];	//bone weights
-
-		//Set up a mapping to interpret Assimp's bone organization
-		std::string* boneMappingNames = new std::string[myAiMesh->mNumBones];
-		int* boneMappingIDs = new int[myAiMesh->mNumBones];
-		int spotsFilled = 0;
+		int newBoneIdx = 0;
 
 		//Loop through the bones and map them uniquely into our array
 		for (unsigned int j = 0; j < myAiMesh->mNumBones; j++)
 		{
-			int currBoneIndex;
+			const std::string boneName = myAiMesh->mBones[j]->mName.data;
 
 			//See if the current Bone is already there
-			int index = 0;
-			std::string boneName(myAiMesh->mBones[j]->mName.C_Str());
-			while (index < spotsFilled && boneMappingNames[index] != boneName) {
-				index++;
-			}
-			if (index == spotsFilled) { //This is a new bone; make a new entry.
-				currBoneIndex = spotsFilled; //index of the last open spot
-				spotsFilled++;
-				bonesIn[index] = new Bone();
+			if(boneMap.find(boneName) == boneMap.end()) { //This is a new bone; make a new entry.
+				newBoneIdx = numBones;
+				numBones++;
+				bonesIn.push_back(new Bone());
+				boneMap[boneName] = newBoneIdx;
 			}
 			else { // The bone is already present
-				currBoneIndex = index;
+				newBoneIdx = boneMap[boneName];
 			}
-			boneMappingIDs[currBoneIndex] = currBoneIndex;
+			
+			//Copy bone name and inverse bind pose
+			bonesIn[newBoneIdx]->setName(boneName);
+			aiVector3D scaleVec, positionVec;
+			aiQuaternion rotQuat;
+			aiMatrix4x4 offset = myAiMesh->mBones[j]->mOffsetMatrix;
+			bonesIn[newBoneIdx]->setInvOffset(new Matrix44f(offset.a1, offset.a2, offset.a3, offset.a4,
+				offset.b1, offset.b2, offset.b3, offset.b4,
+				offset.c1, offset.c2, offset.c3, offset.c4,
+				offset.d1, offset.d2, offset.d3, offset.d4));
+			//bonesIn[newBoneIdx]->setInvOffset(new Matrix44f(offset.a1, offset.b1, offset.c1, offset.d1,
+			//	offset.a2, offset.b2, offset.c2, offset.d2,
+			//	offset.a3, offset.b3, offset.c3, offset.d3,
+			//	offset.a4, offset.b4, offset.c4, offset.d4));
 
-			//Copy bone name and orientation
-			bonesIn[currBoneIndex]->setName(myAiMesh->mBones[j]->mName.C_Str());
-			aiMatrix4x4 currMat = myAiMesh->mBones[j]->mOffsetMatrix;
-			bonesIn[currBoneIndex]->setTransformation(currMat.a1, currMat.a2, currMat.a3, currMat.a4,
-				currMat.b1, currMat.b2, currMat.b3, currMat.b4,
-				currMat.c1, currMat.c2, currMat.c3, currMat.c4,
-				currMat.d1, currMat.d2, currMat.d3, currMat.d4);
+			offset = myAiMesh->mBones[j]->mOffsetMatrix.Inverse();
+			offset.Decompose(scaleVec, rotQuat, positionVec);
+			bonesIn[newBoneIdx]->setScale(scaleVec.x,scaleVec.y,scaleVec.z);
+			bonesIn[newBoneIdx]->setRotation(rotQuat.w, rotQuat.x, rotQuat.y, rotQuat.z);
+			bonesIn[newBoneIdx]->setTranslation(positionVec.x, positionVec.y, positionVec.z);
+			//offset.Inverse();
+			//bonesIn[newBoneIdx]->setInvOffset(Matrix44f(offset.a1,offset.a2,offset.a3,offset.a4,
+			//											offset.b1, offset.b2, offset.b3, offset.b4, 
+			//											offset.c1, offset.c2, offset.c3, offset.c4, 
+			//											offset.d1, offset.d2, offset.d3, offset.d4 ));
 
 			//Get the bone weights per vertex
 			for (unsigned int k = 0; k < myAiMesh->mBones[j]->mNumWeights; k++)
 			{
 				unsigned int vertexID = myAiMesh->mBones[j]->mWeights[k].mVertexId;
 				float weight = myAiMesh->mBones[j]->mWeights[k].mWeight;
-				boneInfoIn[vertexID].addBoneData(currBoneIndex, weight);
+				boneInfoIn[vertexID].addBoneData(newBoneIdx, weight);
 			}
 		}
 
@@ -379,7 +391,10 @@ bool ResourceMan::LoadMesh(const char* filename, LoadedGeometry*& meshOut)
 		meshesIn[i] = newMesh;
 		newMesh->setMatIndex(myAiMesh->mMaterialIndex);
 		newMesh->setVBI(boneInfoIn);
-		//newMesh->setBones(bonesIn, myAiMesh->mNumBones);
+	}
+	Bone** boneArray = new Bone*[numBones];
+	for (int i = 0; i < numBones; i++) {
+		boneArray[i] = bonesIn.at(i);
 	}
 
 	//---------------------------------------------------------------------------------------------
@@ -468,7 +483,7 @@ bool ResourceMan::LoadMesh(const char* filename, LoadedGeometry*& meshOut)
 
 				Vector3f** positionKeys = new Vector3f*[currChannel->mNumPositionKeys];
 				Quaternionf** rotationKeys = new Quaternionf*[currChannel->mNumRotationKeys];
-				float* scalingKeys = new float[currChannel->mNumScalingKeys];
+				Vector3f** scalingKeys = new Vector3f*[currChannel->mNumScalingKeys];
 				float* positionKeyTimes = new float[currChannel->mNumPositionKeys];
 				float* rotationKeyTimes = new float[currChannel->mNumRotationKeys];
 				float* scalingKeyTimes = new float[currChannel->mNumScalingKeys];
@@ -483,12 +498,13 @@ bool ResourceMan::LoadMesh(const char* filename, LoadedGeometry*& meshOut)
 				{
 					aiQuaternion* currRot = &currChannel->mRotationKeys[k].mValue;
 					rotationKeys[k] = new Quaternionf(currRot->w, currRot->x, currRot->y, currRot->z);
+					rotationKeys[k]->invertIn(); //Invert rotation keys for storage.
 					rotationKeyTimes[k] = currChannel->mRotationKeys[k].mTime;
 				}
 				for (unsigned int k = 0; k < currChannel->mNumScalingKeys; k++)
 				{
 					aiVector3D* currScale = &currChannel->mScalingKeys[k].mValue;
-					scalingKeys[k] = currScale->x;
+					scalingKeys[k] = new Vector3f(currScale->x, currScale->y, currScale->z);
 					double currTime = currChannel->mScalingKeys[k].mTime;
 				}
 
@@ -536,16 +552,11 @@ bool ResourceMan::LoadMesh(const char* filename, LoadedGeometry*& meshOut)
 		animationsIn = NULL;
 	}
 
-	//Get the root-node skeleton
-	Bone** skeletonIn = new Bone*[100];
-	Bone* currBone = new Bone();
-	skeletonIn[0] = currBone;
-	aiNode* currRN = myScene->mRootNode;
-	int numBones = 0;
-
-	buildSkeleton(currRN, currBone, skeletonIn, numBones);
-
-	meshOut = new LoadedGeometry(meshesIn, texturesIn, materialsIn, animationsIn, skeletonIn, numMeshes, numTextures, numMaterials, numAnimations, numBones, gIT);
+	//Get the scene graph for the loaded scene
+	std::string rootName(myScene->mRootNode->mName.data);
+	Node* rootNode = new Node(NULL, boneArray[boneMap[rootName]]);
+	buildSceneGraph(myScene->mRootNode, rootNode, boneArray, &boneMap);
+	meshOut = new LoadedGeometry(meshesIn, texturesIn, materialsIn, animationsIn, rootNode, boneArray, numMeshes, numTextures, numMaterials, numAnimations, numBones, gIT);
 	return TRUE;
 }
 
@@ -553,36 +564,29 @@ bool ResourceMan::LoadMesh(const char* filename, LoadedGeometry*& meshOut)
 * buildSceneGraph recursively traverses the aiScene's node structure and converts
 * it to a local format.
 */
-void ResourceMan::buildSkeleton(aiNode* currAiNode, Bone* currBone, Bone** bonePile, int& countBones)
+void ResourceMan::buildSceneGraph(aiNode* currAiNode, Node* currNode, Bone** bonesIn, std::map<std::string, int>* boneMap)
 {
-	currBone->setName(currAiNode->mName.C_Str());
+	currNode->setName(std::string(currAiNode->mName.data));
 
-	aiMatrix4x4 currMat = currAiNode->mTransformation;
-	//currBone->setTransformation(currMat.a1, currMat.b1, currMat.c1, currMat.d1,
-	//							currMat.a2, currMat.b2, currMat.c2, currMat.d2,
-	//							currMat.a3, currMat.b3, currMat.c3, currMat.d3,
-	//							currMat.a4, currMat.b4, currMat.c4, currMat.d4);
-	currBone->setTransformation(currMat.a1, currMat.a2, currMat.a3, currMat.a4,
-							currMat.b1, currMat.b2, currMat.b3, currMat.b4,
-							currMat.c1, currMat.c2, currMat.c3, currMat.c4,
-							currMat.d1, currMat.d2, currMat.d3, currMat.d4);
-	countBones++;
+	aiVector3D scaleVec, positionVec;
+	aiQuaternion rotQuat;
+	currAiNode->mTransformation.Decompose(scaleVec, rotQuat, positionVec);
+	currNode->setScale(scaleVec.x,scaleVec.y,scaleVec.z);
+	currNode->setRotation(rotQuat.w, rotQuat.x, rotQuat.y, rotQuat.z);
+	currNode->setTranslation(positionVec.x, positionVec.y, positionVec.z);
 
-	//build skeleton recursively
-	int numM = currAiNode->mNumMeshes;
+	//build graph recursively
 	int numC = currAiNode->mNumChildren;
-	for (int i = 0; i < numM && i < 10; i++)
-	{
-		currBone->setMIndex(i, currAiNode->mMeshes[i]);
-		currBone->addNumMIndices(1);
-	}
 	for (int i = 0; i < numC; i++)
 	{
-		aiNode* newNode = currAiNode->mChildren[i];
-		Bone* newChild = new Bone();
-		currBone->attachChild(newChild);
-		bonePile[countBones] = newChild;
-		buildSkeleton(newNode, newChild, bonePile, countBones);
+		std::string boneName = currAiNode->mChildren[i]->mName.data;
+		Node* newChild;
+		if(boneMap->find(boneName) == boneMap->end())
+			newChild = new Node(currNode, NULL);
+		else
+			newChild = new Node(currNode, bonesIn[(*boneMap)[boneName]]);
+		currNode->attachChild(newChild);
+		buildSceneGraph(currAiNode->mChildren[i], newChild, bonesIn, boneMap);
 	}
 }
 bool ResourceMan::doesFileExist(std::string fileName)

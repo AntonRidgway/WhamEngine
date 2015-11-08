@@ -318,7 +318,7 @@ template <class Real> Vector4<Real>::Vector4( Vector4<Real> &vectorIn )
 	data[0] = vectorIn.getEntry(0);
 	data[1] = vectorIn.getEntry(1);
 	data[2] = vectorIn.getEntry(2);
-	data[2] = vectorIn.getEntry(3);
+	data[3] = vectorIn.getEntry(3);
 	magInit = false;
 }
 template <class Real> void Vector4<Real>::addIn ( Vector4<Real> &vectorIn )

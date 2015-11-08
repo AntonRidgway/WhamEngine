@@ -3,13 +3,14 @@
 #include <gl\GL.h>
 #include "LoadedGeometry.h"
 
-LoadedGeometry::LoadedGeometry(TriMesh** meshesIn, Texture** texturesIn, Material** materialsIn, AnimClip** animationsIn, Bone** bonesIn,
-							   int nMe, int nT, int nMa, int nA, int nB, Matrix44f* gitIn)
+LoadedGeometry::LoadedGeometry(TriMesh** meshesIn, Texture** texturesIn, Material** materialsIn, AnimClip** animationsIn, Node* graphIn, Bone** bonesIn,
+	int nMe, int nT, int nMa, int nA, int nB, Matrix44f* gitIn)
 {
 	myMeshes = meshesIn;
 	myTextures = texturesIn;
 	myMaterials = materialsIn;
 	myAnimations = animationsIn;
+	myGraph = graphIn;
 	myBones = bonesIn;
 	numMeshes = nMe;
 	numTextures = nT;
@@ -28,8 +29,14 @@ LoadedGeometry::~LoadedGeometry()
 void LoadedGeometry::renderSpecific()
 {
 	//Transform vertices to match generated skeletal positions
+	//glPointSize(10.0f);
+	//glLineWidth(4.0f);
+	//glDisable(GL_TEXTURE_2D);
+	//glDisable(GL_LIGHTING);
 	if (currentAnimation != NULL)
 		setBoneTransformations(myClock.getTimeSinceStartTime());
+	//glEnable(GL_LIGHTING);
+	//glEnable(GL_TEXTURE_2D);
 
 	for( int i = 0; i < numMeshes; i++ )
 	{
@@ -67,13 +74,10 @@ void LoadedGeometry::renderSpecific()
 				finalVertices[i1] = newPos.getEntry(1);
 				finalVertices[i2] = newPos.getEntry(2);
 				Vector4f oldNrm(initialNormals[i0], initialNormals[i1], initialNormals[i2], 0.0f);
-				//Vector4f newNrm = vTransform.multiply(newPos);
-				//finalNormals[i0] = newNrm.getEntry(0);
-				//finalNormals[i1] = newNrm.getEntry(1);
-				//finalNormals[i2] = newNrm.getEntry(2);
-				finalNormals[i0] = oldNrm.getEntry(0);
-				finalNormals[i1] = oldNrm.getEntry(1);
-				finalNormals[i2] = oldNrm.getEntry(2);
+				Vector4f newNrm = vTransform.multiply(oldNrm);
+				finalNormals[i0] = newNrm.getEntry(0);
+				finalNormals[i1] = newNrm.getEntry(1);
+				finalNormals[i2] = newNrm.getEntry(2);
 
 				i0 += 3;
 				i1 += 3;
@@ -133,19 +137,12 @@ void LoadedGeometry::setBoneTransformations(float realTime)
 	float currTPS;
     if (currentAnimation->getTPS() != 0) currTPS = currentAnimation->getTPS();
 	else currTPS = 25.0f;
-
     float timeInTicks = realTime * currTPS; //number of ticks into the animation
     float animationTime = Mathf::Fmod(timeInTicks, currentAnimation->getDuration()); // get the time from the start of the animation with a float-modulus
-
-	recurseBoneTransformations(animationTime, myBones[0], Matrix44f::identity);
-    for (int i = 0 ; i < numBones ; i++)
-	{
-       if(myBones[i]->getAnimTransform() == NULL)
-		   myBones[i]->setAnimTransform(new Matrix44f(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1));
-	}
+	recurseBoneTransformations(animationTime, myGraph, Matrix44f::identity);
 }
 
-void LoadedGeometry::recurseBoneTransformations(float animTime, Bone* currNode, Matrix44f parentTransform)
+void LoadedGeometry::recurseBoneTransformations(float animTime, Node* currNode, Matrix44f parentTransform)
 {
 	// Derive the correct animation position for the current node.
     std::string nodeName(currNode->getName());
@@ -154,18 +151,39 @@ void LoadedGeometry::recurseBoneTransformations(float animTime, Bone* currNode, 
 
     if (currChannel != NULL) {
         // Generate transformation matrix
-        float scale = currChannel->getScale(animTime);
-        Matrix44f scaleMat(scale,0,0,0,0,scale,0,0,0,0,scale,0,0,0,0,1);
-		Matrix44f rotMat = currChannel->getRotation(animTime).transpose();
-		Matrix44f transMat = currChannel->getPosition(animTime).transpose();
+        Matrix44f scaleMat(currChannel->getScale(animTime).getEntry(0),0,0,0,
+			0, currChannel->getScale(animTime).getEntry(1),0,0,
+			0,0, currChannel->getScale(animTime).getEntry(2),0,
+			0,0,0,1);
+		Matrix44f rotMat = currChannel->getRotation(animTime);
+		Matrix44f transMat = currChannel->getPosition(animTime);
 
         // Combine the above transformations
-        globalTransformation = new Matrix44f(parentTransform.multiply(transMat.multiply(rotMat.multiply(scaleMat))));
+		globalTransformation = new Matrix44f(parentTransform.multiply(transMat).multiply(rotMat).multiply(scaleMat));
     }
 	else {
-		globalTransformation = new Matrix44f(parentTransform);
+		globalTransformation = new Matrix44f(parentTransform.multiply(currNode->getTransformation()));
 	}
-	currNode->setAnimTransform(globalTransformation);
+	Bone* myBone = currNode->getBone();
+	if (myBone != NULL) {
+		Matrix44f boneTransform = myBone->getTransformation();
+		currNode->getBone()->setAnimTransform(new Matrix44f(globalInverseTransform->multiply(*globalTransformation).multiply(*myBone->getInvOffset())));
+
+		//Matrix44f myLoc = currNode->getBone()->getAnimTransform()->transpose();
+		//if (currNode->getParent() != NULL && currNode->getParent()->getBone() != NULL) {
+		//	Matrix44f parLoc = currNode->getParent()->getBone()->getAnimTransform()->transpose();
+		//	glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+		//	glBegin(GL_LINES);
+		//	glVertex3f(myLoc.getEntry(3, 0), myLoc.getEntry(3, 1), myLoc.getEntry(3, 2));
+		//	glVertex3f(parLoc.getEntry(3, 0), parLoc.getEntry(3, 1), parLoc.getEntry(3, 2));
+		//	glEnd();
+		//}
+		//glColor4f(1.0f, 0.5f, 0.5f, 1.0f);
+		//glBegin(GL_POINTS);
+		//glVertex3f(myLoc.getEntry(3,0), myLoc.getEntry(3, 1), myLoc.getEntry(3, 2));
+		//glEnd();
+	}
 	for (int i = 0; i < currNode->getNumChildren(); i++)
 		recurseBoneTransformations(animTime, currNode->getChild(i), *globalTransformation);
+	delete globalTransformation;
 }

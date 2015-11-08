@@ -21,8 +21,8 @@ protected:
 	GLfloat* UVs;				//texture coordinates per vertex
 	int matIndex;				//index to an external list of material properties
 	VertexBoneInfo* vBIs;		//bone weight information for each loaded vertex
-	//Bone** bones;				//bones of the mesh
-	//int numBones;
+	Bone** bones;				//bones of the mesh
+	int numBones;
 
 	TriMesh();					//blank constructor for inheriting classes only (e.g. primitive mesh shapes)
 
@@ -44,9 +44,9 @@ public:
 	int getMatIndex();
 	void setVBI( VertexBoneInfo* vbiIn );
 	VertexBoneInfo* getVBI();
-	//void setBones( Bone** bonesIn, int nB );
-	//Bone** getBones();
-	//Bone* getBone(int i);
-	//Bone* getBone(std::string boneName);
+	void setBones( Bone** bonesIn, int nB );
+	Bone** getBones();
+	Bone* getBone(int i);
+	Bone* getBone(std::string boneName);
 };
 #endif

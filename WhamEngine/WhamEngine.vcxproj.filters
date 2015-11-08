@@ -114,9 +114,6 @@
     <ClInclude Include="input\RotationCommand.h">
       <Filter>Header Files\input</Filter>
     </ClInclude>
-    <ClInclude Include="input\TransformationCommand.h">
-      <Filter>Header Files\input</Filter>
-    </ClInclude>
     <ClInclude Include="input\TranslationCommand.h">
       <Filter>Header Files\input</Filter>
     </ClInclude>
@@ -216,6 +213,9 @@
     <ClInclude Include="resources\DblStackAllocator.h">
       <Filter>Header Files\resources</Filter>
     </ClInclude>
+    <ClInclude Include="scene\animation\Node.h">
+      <Filter>Header Files\scene\animation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -249,9 +249,6 @@
       <Filter>Source Files\input</Filter>
     </ClCompile>
     <ClCompile Include="input\RotationCommand.cpp">
-      <Filter>Source Files\input</Filter>
-    </ClCompile>
-    <ClCompile Include="input\TransformationCommand.cpp">
       <Filter>Source Files\input</Filter>
     </ClCompile>
     <ClCompile Include="input\TranslationCommand.cpp">
@@ -340,6 +337,9 @@
     </ClCompile>
     <ClCompile Include="resources\ResourceMan.cpp">
       <Filter>Source Files\resources</Filter>
+    </ClCompile>
+    <ClCompile Include="scene\animation\Node.cpp">
+      <Filter>Source Files\scene\animation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -9,7 +9,7 @@ private:
 	//viewport parameters
 	const double CAM_FOV = 100.;
 	const double CAM_ZNEAR = 1.0;
-	const double CAM_ZFAR = 100.;
+	const double CAM_ZFAR = 1000.;
 	double aspectRatio;
 
 public:

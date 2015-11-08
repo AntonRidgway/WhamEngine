@@ -2,7 +2,7 @@
 #include "Entity.h"
 
 Entity::Entity(std::string nameIn) : Spatial(nameIn) {}
-Entity::Entity(Vector3f translationIn, Matrix44f rotationIn, float scaleIn, std::string nameIn) : Spatial(translationIn, rotationIn, scaleIn, nameIn) {};
+Entity::Entity(Vector3f translationIn, Matrix44f rotationIn, Vector3f scaleIn, std::string nameIn) : Spatial(translationIn, rotationIn, scaleIn, nameIn) {};
 Entity::Entity(Entity& e) : Spatial(e) {};
 void Entity::render() {
 	Matrix44f rotation = getRotation();
@@ -28,12 +28,12 @@ void Entity::render() {
 		0.0f, 0.0f, 1.0f, 0.0f,
 		translation.getEntry(0), translation.getEntry(1), translation.getEntry(2), 1.0f
 	};
-	float scale = getScale();
+	Vector3f scale = getScale();
 	float scaleMatrix[16] =
 	{
-		scale, 0.0f, 0.0f, 0.0f,
-		0.0f, scale, 0.0f, 0.0f,
-		0.0f, 0.0f, scale, 0.0f,
+		scale.getEntry(0), 0.0f, 0.0f, 0.0f,
+		0.0f, scale.getEntry(1), 0.0f, 0.0f,
+		0.0f, 0.0f, scale.getEntry(2), 0.0f,
 		0.0f, 0.0f, 0.0f, 1.0f
 	};
 

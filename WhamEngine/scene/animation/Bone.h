@@ -13,6 +13,7 @@ private:
 	unsigned int* meshIndex;
 	int numMIndices;
 	Matrix44f* animTransform;
+	Matrix44f* invOffset;
 public:
 	Bone();
 	Bone( Bone* parent );
@@ -28,6 +29,8 @@ public:
 	int getNumMIndices() const;
 	void setAnimTransform( Matrix44f* transIn );
 	Matrix44f* getAnimTransform();
+	void setInvOffset(Matrix44f* invOffIn);
+	Matrix44f* getInvOffset();
 };
 
 #endif

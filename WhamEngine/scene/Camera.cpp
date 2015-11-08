@@ -11,7 +11,7 @@ Camera::Camera(int wIn, int hIn, std::string name) : Spatial(name) {
 	setAspectRatio(((double)wIn) / hIn);
 	updateGLCam();
 }
-Camera::Camera(int wIn, int hIn, Vector3f loc, Matrix44f rot, std::string name) : Spatial(loc, rot, 1.0f, name) {
+Camera::Camera(int wIn, int hIn, Vector3f loc, Matrix44f rot, std::string name) : Spatial(loc, rot, Vector3f(1.0f,1.0f,1.0f), name) {
 	// Adjust the viewport so that it draws to the entire screen, and adjust the camera perspective.
 	glViewport(0, 0, wIn, hIn);
 	setAspectRatio(((double)wIn) / hIn);
@@ -22,7 +22,7 @@ Camera::Camera(int wIn, int hIn, float lx, float ly, float lz,
 	float ux, float uy, float uz,
 	float rx, float ry, float rz, std::string name) :
 	Spatial(Vector3f(lx, ly, lz),
-		Matrix44f(rx, ry, rz, 0, ux, uy, uz, 0, dx, dy, dz, 0, 0, 0, 0, 1), 1.0f, name) {
+		Matrix44f(rx, ry, rz, 0, ux, uy, uz, 0, dx, dy, dz, 0, 0, 0, 0, 1), Vector3f(1.0f,1.0f,1.0f), name) {
 	glViewport(0, 0, wIn, hIn);
 	setAspectRatio(((double)wIn) / hIn);
 	updateGLCam();

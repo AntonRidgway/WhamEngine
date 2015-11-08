@@ -170,7 +170,6 @@ xcopy /y "$(SolutionDir)assets\*.*" "$(OutDir)"</Command>
     <ClInclude Include="input\ScaleCommand.h" />
     <ClInclude Include="input\SetGravityCommand.h" />
     <ClInclude Include="input\ShootCommand.h" />
-    <ClInclude Include="input\TransformationCommand.h" />
     <ClInclude Include="input\TranslationCommand.h" />
     <ClInclude Include="input\UpCommand.h" />
     <ClInclude Include="input\YawCommand.h" />
@@ -190,6 +189,7 @@ xcopy /y "$(SolutionDir)assets\*.*" "$(OutDir)"</Command>
     <ClInclude Include="scene\animation\AnimChannel.h" />
     <ClInclude Include="scene\animation\AnimClip.h" />
     <ClInclude Include="scene\animation\Bone.h" />
+    <ClInclude Include="scene\animation\Node.h" />
     <ClInclude Include="scene\animation\VertexBoneInfo.h" />
     <ClInclude Include="scene\Camera.h" />
     <ClInclude Include="scene\Clock.h" />
@@ -220,7 +220,6 @@ xcopy /y "$(SolutionDir)assets\*.*" "$(OutDir)"</Command>
     <ClCompile Include="input\ScaleCommand.cpp" />
     <ClCompile Include="input\SetGravityCommand.cpp" />
     <ClCompile Include="input\ShootCommand.cpp" />
-    <ClCompile Include="input\TransformationCommand.cpp" />
     <ClCompile Include="input\TranslationCommand.cpp" />
     <ClCompile Include="input\UpCommand.cpp" />
     <ClCompile Include="input\YawCommand.cpp" />
@@ -234,6 +233,7 @@ xcopy /y "$(SolutionDir)assets\*.*" "$(OutDir)"</Command>
     <ClCompile Include="scene\animation\AnimChannel.cpp" />
     <ClCompile Include="scene\animation\AnimClip.cpp" />
     <ClCompile Include="scene\animation\Bone.cpp" />
+    <ClCompile Include="scene\animation\Node.cpp" />
     <ClCompile Include="scene\animation\VertexBoneInfo.cpp" />
     <ClCompile Include="scene\Camera.cpp" />
     <ClCompile Include="scene\Clock.cpp" />
