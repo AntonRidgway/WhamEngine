@@ -2,6 +2,7 @@
 #define WE_FSYSMAN_H
 
 #include "PoolAllocator.h"
+#include "math/Math.h"
 #include "resources/LoadedGeometry.h"
 #include "resources/Material.h"
 #include "resources/Texture.h"

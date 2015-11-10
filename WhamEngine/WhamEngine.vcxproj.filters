@@ -40,9 +40,6 @@
     <Filter Include="Header Files\physics">
       <UniqueIdentifier>{15511f1b-e7e5-4e1e-8144-554516136eb2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\math">
-      <UniqueIdentifier>{fdaa5f94-a472-497f-a789-6d62939c5f0d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\scene\animation">
       <UniqueIdentifier>{4663b8be-9561-4b29-b436-76200a076848}</UniqueIdentifier>
     </Filter>
@@ -127,9 +124,6 @@
       <Filter>Header Files\input</Filter>
     </ClInclude>
     <ClInclude Include="input\ScaleCommand.h">
-      <Filter>Header Files\input</Filter>
-    </ClInclude>
-    <ClInclude Include="input\ShootCommand.h">
       <Filter>Header Files\input</Filter>
     </ClInclude>
     <ClInclude Include="input\SetGravityCommand.h">
@@ -239,9 +233,6 @@
     <ClCompile Include="RenderMan.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="math\Math.cpp">
-      <Filter>Source Files\math</Filter>
-    </ClCompile>
     <ClCompile Include="input\PitchCommand.cpp">
       <Filter>Source Files\input</Filter>
     </ClCompile>
@@ -258,9 +249,6 @@
       <Filter>Source Files\input</Filter>
     </ClCompile>
     <ClCompile Include="input\ScaleCommand.cpp">
-      <Filter>Source Files\input</Filter>
-    </ClCompile>
-    <ClCompile Include="input\ShootCommand.cpp">
       <Filter>Source Files\input</Filter>
     </ClCompile>
     <ClCompile Include="input\SetGravityCommand.cpp">

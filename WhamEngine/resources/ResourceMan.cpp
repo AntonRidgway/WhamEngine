@@ -65,109 +65,109 @@ void ResourceMan::loadLevel(std::string roomFile, Scene* scene)
 	
 	//First, create the walls of our bounding box
 	//floor
-	
 	TriMesh* shape = new Quad(30.0f,30.0f);
 	Geometry* simpleGeom = new Geometry(shape, textureMap["carpet.bmp"], materialMap["dull"]);
-	simpleGeom->rotateX(1.571f);
+	simpleGeom->rotateX(Mathf::HALF_PI);
 	simpleGeom->translate(0.0f,-15.0f,15.0f);
 	scene->addSceneE(simpleGeom);
+	PhysicsMan::getInstance().addPlane(NULL, 0., Vector3f(0.f,0.f,0.f), Vector3f(0.f, 1.f, 0.f), -15.f);
 	
 	//north wall
 	shape = new Quad(30.0f,30.0f);
 	simpleGeom = new Geometry(shape, textureMap["wall.bmp"], materialMap["dull"]);
 	simpleGeom->translate(0.0f,-15.0f,-15.0f);
 	scene->addSceneE(simpleGeom);
+	PhysicsMan::getInstance().addPlane(NULL, 0., Vector3f(0.f, 0.f, 0.f), Vector3f(0.f, 0.f, -1.f), -15.f);
 
 	//south wall
 	shape = new Quad(30.0f,30.0f);
 	simpleGeom = new Geometry(shape, textureMap["wall.bmp"], materialMap["dull"]);
-	simpleGeom->rotateY(3.1415f);
-	simpleGeom->translate(0.0f,-15.0f,15.0f);
+	simpleGeom->rotateY(-Mathf::PI);
+	simpleGeom->translate(0.0f, -15.0f, 15.0f);
 	scene->addSceneE(simpleGeom);
+	PhysicsMan::getInstance().addPlane(NULL, 0., Vector3f(0.f, 0.f, 0.f), Vector3f(0.f, 0.f, 1.f), -15.f);
 
 	//west wall
 	shape = new Quad(30.0f,30.0f);
 	simpleGeom = new Geometry(shape, textureMap["wall.bmp"], materialMap["dull"]);
-	simpleGeom->rotateY(-1.571f);
-	simpleGeom->translate(-15.0f,-15.0f,0.0f);
+	simpleGeom->rotateY(-Mathf::HALF_PI);
+	simpleGeom->translate(-15.0f, -15.0f, 0.0f);
 	scene->addSceneE(simpleGeom);
+	PhysicsMan::getInstance().addPlane(NULL, 0., Vector3f(0.f, 0.f, 0.f), Vector3f(1.f, 0.f, 0.f), -15.f);
 
 	//east wall
 	shape = new Quad(30.0f,30.0f);
 	simpleGeom = new Geometry(shape, textureMap["wallpic.bmp"], materialMap["dull"]);
-	simpleGeom->rotateY(1.571f);
-	simpleGeom->translate(15.0f,-15.0f,0.0f);
+	simpleGeom->rotateY(Mathf::HALF_PI);
+	simpleGeom->translate(15.0f, -15.0f, 0.0f);
 	scene->addSceneE(simpleGeom);
+	PhysicsMan::getInstance().addPlane(NULL, 0., Vector3f(0.f, 0.f, 0.f), Vector3f(-1.f, 0.f, 0.f), -15.f);
 
 	//sky
 	shape = new Quad(30.0f,30.0f);
 	simpleGeom = new Geometry(shape, textureMap["sky.bmp"], materialMap["dull"]);
 	simpleGeom->rotateX(-1.571f);
-	simpleGeom->translate(0.0f,15.0f,-15.0f);
+	simpleGeom->translate(0.0f, 15.0f, -15.0f);
 	scene->addSceneE(simpleGeom);
+	PhysicsMan::getInstance().addPlane(NULL, 0., Vector3f(0.f, 0.f, 0.f), Vector3f(0.f, -1.f, 0.f), -15.f);
 
 	//tall box
 	shape = new Box(2.0f,1.5f,3.0f);
 	simpleGeom = new Geometry(shape, textureMap["box.bmp"], materialMap["dull"]);
-	simpleGeom->translate(2.3f,0.0f,-7.5f);
-	simpleGeom->rotateY(0.3f);
 	scene->addSceneE(simpleGeom);
+	PhysicsMan::getInstance().addBox(simpleGeom, 1.f,Vector3f(0.f,0.f,0.f), Vector3f(5.f, 3.f, 0.f), Quaternionf(0.f, 1.f, 1.f, 1.f), Vector3f(1.0, 1.5, 0.75));
 	
 	//Tiny Box
 	shape = new Box(1.0f,1.0f,1.0f);
 	simpleGeom = new Geometry(shape, textureMap["brick.bmp"], materialMap["dull"]);
-	simpleGeom->translate(3.3f, 0.0f, -7.5f);
-	simpleGeom->rotateY(0.6f);
 	scene->addSceneE(simpleGeom);
-	
+	PhysicsMan::getInstance().addBox(simpleGeom, 0.3f, Vector3f(0.f, 0.f, 0.f), Vector3f(-3.f, 10.f, 0.f), Quaternionf(0.f, 0.f, 0.f, 1.f), Vector3f(0.5f,0.5f,0.5f));
+
 	//Mid Box
 	shape = new Box(2.0f,2.0f,2.0f);
 	simpleGeom = new Geometry(shape, textureMap["brick.bmp"], materialMap["dull"]);
-	simpleGeom->translate(4.3f, 0.0f, -7.5f);
-	simpleGeom->rotateY(0.9f);
 	scene->addSceneE(simpleGeom);
+	PhysicsMan::getInstance().addBox(simpleGeom, 5.f, Vector3f(0.f, 0.f, 0.f), Vector3f(2.f, 10.f, 0.f), Quaternionf(0.f, 1.f, 1.f, 1.f), Vector3f(1.f, 1.f, 1.f));
 
 	//Regular Pyramid
 	shape = new Pyramid(1.0f,2.0f);
 	simpleGeom = new Geometry(shape, textureMap["brick.bmp"], materialMap["dull"]);
-	simpleGeom->translate(5.3f, 0.0f, -7.5f);
-	simpleGeom->rotateY(1.2f);
 	scene->addSceneE(simpleGeom);
+	PhysicsMan::getInstance().addConvexHull(simpleGeom, 1.f, Vector3f(0.f, 0.f, 0.f), Vector3f(10.f, 5.f, 2.f), Quaternionf(0.f, 1.f, 1.f, 1.f),
+		shape->getVertices(), shape->getNumVertices());
 	
 	//tall pyramid
 	shape = new Pyramid(1.0f, 3.0f);
 	simpleGeom = new Geometry(shape, textureMap["wall.bmp"], materialMap["dull"]);
-	simpleGeom->translate(6.3f, 0.0f, -7.5f);
-	simpleGeom->rotateY(1.5f);
 	scene->addSceneE(simpleGeom);
+	PhysicsMan::getInstance().addConvexHull(simpleGeom, 1.f, Vector3f(0.f, 0.f, 0.f), Vector3f(10.f, 5.f, -2.f), Quaternionf(0.f, 1.f, 1.f, 1.f),
+		shape->getVertices(), shape->getNumVertices());
 
 	//quadrics
-	scene->addSceneE(new QuadricSphere(textureMap["eyeball.bmp"], materialMap["slime"],-5.0f,5.0f,0.0f, 1.5f,8,5, GLU_FILL,GLU_SMOOTH,GLU_OUTSIDE,GL_TRUE));
-	scene->addSceneE(new QuadricSphere(textureMap["eyeball.bmp"], materialMap["slime"],-5.0f,5.0f,0.0f, 0.5f,6,4, GLU_FILL,GLU_SMOOTH,GLU_OUTSIDE,GL_TRUE));
+	Entity* quadric = new QuadricSphere(textureMap["eyeball.bmp"], materialMap["slime"], -5.0f, 5.0f, 0.0f, 1.5f, 8, 5, GLU_FILL, GLU_SMOOTH, GLU_OUTSIDE, GL_TRUE);
+	scene->addSceneE(quadric);
+	PhysicsMan::getInstance().addSphere(quadric, 10.f, Vector3f(0.f, 0.f, 0.f), Vector3f(-5.f, 5.f, 0.f), Quaternionf(0.f, 1.f, 1.f, 1.f), 1.5f);
+	quadric = new QuadricSphere(textureMap["eyeball.bmp"], materialMap["slime"], -5.0f, 5.0f, 0.0f, 0.5f, 6, 4, GLU_FILL, GLU_SMOOTH, GLU_OUTSIDE, GL_TRUE);
+	scene->addSceneE(quadric);
+	PhysicsMan::getInstance().addSphere(quadric, 0.05f, Vector3f(0.f, 0.f, 0.f), Vector3f(2.f, 5.f, 0.f), Quaternionf(0.f, 0.5f, 0.7f, 0.2f), 0.5f, 0.3f);
 
 	//Loaded Mesh
 	LoadedGeometry* loadedGeom;
 	std::string bobPath = findFileAbsolute("boblampclean.md5mesh");
 	LoadMesh(bobPath.c_str(), loadedGeom);
-	scene->addSceneE(loadedGeom);
-	loadedGeom->translateY(-1.5);
-	loadedGeom->rotateX(1.7);
-	loadedGeom->rotateY(3.14);
 	loadedGeom->scaleBy(0.1f);
+	scene->addSceneE(loadedGeom);
+	PhysicsMan::getInstance().addCapsule(loadedGeom, 1.0f, Vector3f(0.f, 0.f, 0.f), Vector3f(2.f, 5.f, 0.f), Quaternionf(0.f, 0.5f, 0.7f, 0.2f), 2.0f, 5.0f);
 
 	std::string sinbadPath = findFileAbsolute("Sinbad.3ds");
 	LoadMesh(sinbadPath.c_str(), loadedGeom);
 	scene->addSceneE(loadedGeom);
-	loadedGeom->translateY(1.5);
-	loadedGeom->rotateX(-1.7);
-	
+	PhysicsMan::getInstance().addCapsule(loadedGeom, 1.0f, Vector3f(0.f, 0.f, 0.f), Vector3f(2.f, 5.f, 0.f), Quaternionf(0.f, 0.5f, 0.7f, 0.2f), 1.0f, 3.0f);
+
 	scene->addSceneE(new QuadricSphere(textureMap["blank.bmp"], materialMap["bShiny"], -7.0f,7.0f,7.0f,0.3f,6,6,GLU_FILL,GLU_SMOOTH,GLU_OUTSIDE,GL_TRUE));
 	scene->addSceneE(new QuadricSphere(textureMap["blank.bmp"], materialMap["gShiny"], 0.0f,0.0f,-7.0f,0.3f,6,6,GLU_FILL,GLU_SMOOTH,GLU_OUTSIDE,GL_TRUE));
 	scene->addSceneE(new QuadricSphere(textureMap["blank.bmp"], materialMap["rShiny"], 7.0f,-7.0f,3.0f,0.3f,6,6,GLU_FILL,GLU_SMOOTH,GLU_OUTSIDE,GL_TRUE));
-
-	//---------------------------------------------------------------------------------------------
-	//Load HUD Entities
-	
+		
 	//---------------------------------------------------------------------------------------------
 	//Load Lights
 	scene->addLightE(new Light(1.0f, 1.0f, 1.0f, 1.0f,

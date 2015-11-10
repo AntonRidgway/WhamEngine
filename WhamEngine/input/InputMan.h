@@ -11,7 +11,6 @@
 #include "RightCommand.h"
 #include "RollCommand.h"
 #include "SetGravityCommand.h"
-#include "ShootCommand.h"
 #include "YawCommand.h"
 
 // add abstraction for eventual key-mapping capability

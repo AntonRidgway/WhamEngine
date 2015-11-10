@@ -1,8 +1,42 @@
-﻿Build started 11/7/2015 9:36:56 PM.
+﻿Build started 11/9/2015 11:08:17 PM.
      1>Project "D:\Documents\Visual Studio 2015\Projects\WhamEngine\WhamEngine\WhamEngine.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Yu"stdafx.h" /Fp"Debug\WhamEngine.pch" /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt physics\PhysicsMan.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Yu"stdafx.h" /Fp"Debug\WhamEngine.pch" /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt RenderMan.cpp WhamEngine.cpp input\InputMan.cpp input\SetGravityCommand.cpp physics\PhysicsMan.cpp resources\ResourceMan.cpp
+         ResourceMan.cpp
+     1>d:\documents\visual studio 2015\projects\whamengine\whamengine\math\math.h(74): warning C4305: 'initializing': truncation from 'double' to 'const float'
+     1>d:\documents\visual studio 2015\projects\whamengine\whamengine\math\math.h(75): warning C4305: 'initializing': truncation from 'double' to 'const float'
+     1>d:\documents\visual studio 2015\projects\whamengine\whamengine\math\math.h(76): warning C4305: 'initializing': truncation from 'int' to 'const float'
+     1>d:\documents\visual studio 2015\projects\whamengine\whamengine\math\math.h(76): warning C4305: 'initializing': truncation from 'int' to 'float'
+     1>d:\documents\visual studio 2015\projects\whamengine\whamengine\math\math.h(77): warning C4305: 'initializing': truncation from 'double' to 'const float'
+     1>d:\documents\visual studio 2015\projects\whamengine\whamengine\math\math.h(78): warning C4305: 'initializing': truncation from 'double' to 'const float'
+     1>d:\documents\visual studio 2015\projects\whamengine\whamengine\math\math.h(79): warning C4305: 'initializing': truncation from 'double' to 'const float'
+     1>d:\documents\visual studio 2015\projects\whamengine\whamengine\math\math.h(80): warning C4305: 'initializing': truncation from 'double' to 'const float'
+     1>d:\documents\visual studio 2015\projects\whamengine\whamengine\math\math.h(81): warning C4305: 'initializing': truncation from 'double' to 'const float'
+     1>d:\documents\visual studio 2015\projects\whamengine\whamengine\math\math.h(82): warning C4305: 'initializing': truncation from 'double' to 'const float'
+     1>d:\documents\visual studio 2015\projects\whamengine\whamengine\math\math.h(83): warning C4305: 'initializing': truncation from 'double' to 'const float'
+     1>d:\documents\visual studio 2015\projects\whamengine\whamengine\resources\resourceman.cpp(495): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+     1>d:\documents\visual studio 2015\projects\whamengine\whamengine\resources\resourceman.cpp(502): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+     1>d:\documents\visual studio 2015\projects\whamengine\whamengine\resources\resourceman.cpp(546): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
          PhysicsMan.cpp
+     1>d:\documents\visual studio 2015\projects\whamengine\whamengine\physics\physicsman.cpp(54): warning C4244: 'argument': conversion from 'double' to 'btScalar', possible loss of data
+         SetGravityCommand.cpp
+         Generating Code...
+         Compiling...
+         InputMan.cpp
+         WhamEngine.cpp
+     1>d:\documents\visual studio 2015\projects\whamengine\whamengine\math\math.h(74): warning C4305: 'initializing': truncation from 'double' to 'const float'
+     1>d:\documents\visual studio 2015\projects\whamengine\whamengine\math\math.h(75): warning C4305: 'initializing': truncation from 'double' to 'const float'
+     1>d:\documents\visual studio 2015\projects\whamengine\whamengine\math\math.h(76): warning C4305: 'initializing': truncation from 'int' to 'const float'
+     1>d:\documents\visual studio 2015\projects\whamengine\whamengine\math\math.h(76): warning C4305: 'initializing': truncation from 'int' to 'float'
+     1>d:\documents\visual studio 2015\projects\whamengine\whamengine\math\math.h(77): warning C4305: 'initializing': truncation from 'double' to 'const float'
+     1>d:\documents\visual studio 2015\projects\whamengine\whamengine\math\math.h(78): warning C4305: 'initializing': truncation from 'double' to 'const float'
+     1>d:\documents\visual studio 2015\projects\whamengine\whamengine\math\math.h(79): warning C4305: 'initializing': truncation from 'double' to 'const float'
+     1>d:\documents\visual studio 2015\projects\whamengine\whamengine\math\math.h(80): warning C4305: 'initializing': truncation from 'double' to 'const float'
+     1>d:\documents\visual studio 2015\projects\whamengine\whamengine\math\math.h(81): warning C4305: 'initializing': truncation from 'double' to 'const float'
+     1>d:\documents\visual studio 2015\projects\whamengine\whamengine\math\math.h(82): warning C4305: 'initializing': truncation from 'double' to 'const float'
+     1>d:\documents\visual studio 2015\projects\whamengine\whamengine\math\math.h(83): warning C4305: 'initializing': truncation from 'double' to 'const float'
+         RenderMan.cpp
+         Generating Code...
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Documents\Visual Studio 2015\Projects\WhamEngine\Debug\WhamEngine.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib opengl32.lib glu32.lib freeglut.lib release/assimp.lib BulletCollision_vs2010_debug.lib BulletDynamics_vs2010_debug.lib LinearMath_vs2010_debug.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"D:\Documents\Visual Studio 2015\Projects\WhamEngine\Debug\WhamEngine.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /ENTRY:"mainCRTStartup" /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Documents\Visual Studio 2015\Projects\WhamEngine\Debug\WhamEngine.lib" /MACHINE:X86 Debug\WhamEngine.res
          Debug\ForwardCommand.obj
@@ -13,11 +47,9 @@
          Debug\RotationCommand.obj
          Debug\ScaleCommand.obj
          Debug\SetGravityCommand.obj
-         Debug\ShootCommand.obj
          Debug\TranslationCommand.obj
          Debug\UpCommand.obj
          Debug\YawCommand.obj
-         Debug\Math.obj
          Debug\PhysicsMan.obj
          Debug\RenderMan.obj
          Debug\LoadedGeometry.obj
@@ -90,4 +122,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.73
+Time Elapsed 00:00:09.17

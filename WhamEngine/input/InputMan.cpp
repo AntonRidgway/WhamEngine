@@ -75,10 +75,6 @@ void InputMan::startUp(){
 	keyMapping['o'] = rollRight;
 	keyMapping['O'] = rollRight;
 
-	Command* shootBall = new ShootCommand();
-	commandList.push_back(shootBall);
-	keyMapping['b'] = shootBall;
-	keyMapping['B'] = shootBall;
 	Command* setGravity = new SetGravityCommand();
 	commandList.push_back(setGravity);
 	keyMapping['g'] = setGravity;

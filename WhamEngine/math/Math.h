@@ -66,21 +66,34 @@ public:
 	static Real slerp(Vector3<Real> p0, Vector3<Real> p1, Real t) {
 		return p0.multiply(1 - t).add(p1.multiply(t));
 	}
-	
-    // common constants
-    static const Real EPSILON;
-    static const Real ZERO_TOLERANCE; //Arbitrary. Adjust as needed.
-    static const Real MAX_REAL; //Arbitrary. Adjust as needed.
-    static const Real PI;
-	static const Real TWO_PI;
-    static const Real HALF_PI;
-    static const Real INV_PI;
-    static const Real INV_TWO_PI;
-    static const Real DEG_TO_RAD;
-    static const Real RAD_TO_DEG;
 };
 
-typedef Math<float> Mathf;
-typedef Math<double> Mathd;
- 
+class Mathf : public Math<float>
+{
+	public:
+		constexpr static float EPSILON = 2.718281828459;
+		constexpr static float ZERO_TOLERANCE = 0.000001; //Arbitrary. Adjust as needed.
+		constexpr static float MAX_REAL = 999999999; //Arbitrary. Adjust as needed.
+		constexpr static float PI = 3.1415926536;
+		constexpr static float TWO_PI = 6.2831853071;
+		constexpr static float HALF_PI = 1.5707963268;
+		constexpr static float INV_PI = 0.3183098862;
+		constexpr static float INV_TWO_PI = 0.6366197724;
+		constexpr static float DEG_TO_RAD = 0.0174532925;
+		constexpr static float RAD_TO_DEG = 57.2957795131;
+};
+class Mathd : public Math<double>
+{
+	public:
+		constexpr static double EPSILON = 2.718281828459;
+		constexpr static double ZERO_TOLERANCE = 0.000001; //Arbitrary. Adjust as needed.
+		constexpr static double MAX_REAL = 999999999; //Arbitrary. Adjust as needed.
+		constexpr static double PI = 3.1415926536;
+		constexpr static double TWO_PI = 6.2831853071;
+		constexpr static double HALF_PI = 1.5707963268;
+		constexpr static double INV_PI = 0.3183098862;
+		constexpr static double INV_TWO_PI = 0.6366197724;
+		constexpr static double DEG_TO_RAD = 0.0174532925;
+		constexpr static double RAD_TO_DEG = 57.2957795131;
+};
 #endif

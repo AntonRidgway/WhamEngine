@@ -41,5 +41,6 @@ public:
 	Camera* getCamera();
 	Scene* getScene();
 	float getFPS();
+	void shootBall(Vector3f loc, Vector3f dir);
 };
 #endif

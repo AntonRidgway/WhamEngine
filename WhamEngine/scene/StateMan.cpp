@@ -51,3 +51,7 @@ void StateMan::updatePhysics(double secsPassed)
 {
 	PhysicsMan::getInstance().step(secsPassed);
 }
+void StateMan::shootBall(Vector3f loc, Vector3f dir)
+{
+
+}

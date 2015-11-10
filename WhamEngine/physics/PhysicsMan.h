@@ -4,6 +4,10 @@
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicsCommon.h>
 #include "scene/entities/Entity.h"
+#include <map>
+#include <vector>
+
+static const float DEF_RESTITUTION = -1;
 
 class PhysicsMan
 {
@@ -20,9 +24,10 @@ private:
 	
 	btAlignedObjectArray<btCollisionShape*>* myCShapes;
 	Entity** SGEntities;
-	int* physIDs;
-	btScalar* points;
-	btScalar* points2;
+	std::map<btCollisionShape*, Spatial*> physSpatialMap;
+	std::vector<btScalar*> hullData;
+
+	float gravityStrength = 10;
 
 public:
 	static PhysicsMan& getInstance() {
@@ -33,7 +38,15 @@ public:
 	void shutDown();
 	void step(double secsPassed);
 	void setGravity(Vector3f newDir);
-	void shootBall(Vector3f loc, Vector3f dir);
+	void addBox(Spatial* spatial, float mass, Vector3f inertia, Vector3f location, Quaternionf rotation, Vector3f halfExtents, float restitution = DEF_RESTITUTION);
+	void addCapsule(Spatial* spatial, float mass, Vector3f inertia, Vector3f location, Quaternionf rotation, float radius, float height, float restitution = DEF_RESTITUTION);
+	void addCone(Spatial* spatial, float mass, Vector3f inertia, Vector3f location, Quaternionf rotation, float radius, float height, float restitution = DEF_RESTITUTION);
+	void addCylinder(Spatial* spatial, float mass, Vector3f inertia, Vector3f location, Quaternionf rotation, Vector3f halfExtents, float restitution = DEF_RESTITUTION);
+	void addSphere(Spatial* spatial, float mass, Vector3f inertia, Vector3f location, Quaternionf rotation, float radius, float restitution = DEF_RESTITUTION);
+	void addConvexHull(Spatial* spatial, float mass, Vector3f inertia, Vector3f location, Quaternionf rotation, GLfloat* points, int numPoints, float restitution = DEF_RESTITUTION);
+	void addPlane(Spatial* spatial, float mass, Vector3f inertia, Vector3f normal, float offset, float restitution = DEF_RESTITUTION);
+	void addBody(Spatial* spatial, btCollisionShape* physShape, float mass, Vector3f inertia, Vector3f* location, Quaternionf* rotation, float restitution = DEF_RESTITUTION);
+	bool removeBody(Spatial* spatial);
 };
 
 #endif

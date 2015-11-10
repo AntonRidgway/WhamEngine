@@ -169,7 +169,6 @@ xcopy /y "$(SolutionDir)assets\*.*" "$(OutDir)"</Command>
     <ClInclude Include="input\RotationCommand.h" />
     <ClInclude Include="input\ScaleCommand.h" />
     <ClInclude Include="input\SetGravityCommand.h" />
-    <ClInclude Include="input\ShootCommand.h" />
     <ClInclude Include="input\TranslationCommand.h" />
     <ClInclude Include="input\UpCommand.h" />
     <ClInclude Include="input\YawCommand.h" />
@@ -219,11 +218,9 @@ xcopy /y "$(SolutionDir)assets\*.*" "$(OutDir)"</Command>
     <ClCompile Include="input\RotationCommand.cpp" />
     <ClCompile Include="input\ScaleCommand.cpp" />
     <ClCompile Include="input\SetGravityCommand.cpp" />
-    <ClCompile Include="input\ShootCommand.cpp" />
     <ClCompile Include="input\TranslationCommand.cpp" />
     <ClCompile Include="input\UpCommand.cpp" />
     <ClCompile Include="input\YawCommand.cpp" />
-    <ClCompile Include="math\Math.cpp" />
     <ClCompile Include="physics\PhysicsMan.cpp" />
     <ClCompile Include="RenderMan.cpp" />
     <ClCompile Include="resources\LoadedGeometry.cpp" />

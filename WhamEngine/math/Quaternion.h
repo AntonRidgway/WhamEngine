@@ -105,7 +105,7 @@ public:
 	}
 	void invertIn()
 	{
-		double magSq = w*w + x*x + y*y + z*z;
+		Real magSq = w*w + x*x + y*y + z*z;
 		w = w / magSq;
 		x = -x / magSq;
 		y = -y / magSq;
