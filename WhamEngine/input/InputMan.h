@@ -13,7 +13,11 @@
 #include "SetGravityCommand.h"
 #include "YawCommand.h"
 
-// add abstraction for eventual key-mapping capability
+/**
+ * InputMan is a singleton class that manages keyboard and mouse input from the user.
+ * It maintains the mapping between specific keys and reified Command objects, and 
+ * contains the callback functions for input that are used by GLUT.
+ */
 class InputMan
 {
 	public:

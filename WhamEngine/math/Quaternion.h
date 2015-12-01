@@ -98,8 +98,6 @@ public:
 	}
 	Quaternion invert()
 	{
-		//double magnitude = currRot->w*currRot->w + currRot->x*currRot->x + currRot->y*currRot->y + currRot->z*currRot->z;
-		//rotationKeys[k] = new Quaternionf(currRot->w / buh, -currRot->x / buh, -currRot->y / buh, -currRot->z / buh);
 		Quaternion newQ(this).invertIn();
 		return newQ;
 	}

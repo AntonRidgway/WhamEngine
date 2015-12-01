@@ -6,7 +6,6 @@
 #include <Windows.h>
 #include <gl/GL.h>
 
-//placeholder class
 class Entity : public Spatial
 {
 public:
@@ -14,11 +13,14 @@ public:
 	Entity(Vector3f translationIn, Matrix44f rotationIn, Vector3f scaleIn, std::string nameIn = "null");
 	Entity(Entity& e);
 	void render();
-	void setRelativeTransform(Matrix44f matIn);
-	Matrix44f getRelativeTransform();
+	void setRelativeTranslation(Vector3f transIn);
+	Vector3f getRelativeTranslation();
+	void setRelativeRotation(Matrix44f rotIn);
+	Matrix44f getRelativeRotation();
 protected:
 	virtual void renderSpecific() = 0;
-	Matrix44f relativeTransform;
+	Vector3f relTranslation;
+	Matrix44f relRotation;
 };
 
 #endif

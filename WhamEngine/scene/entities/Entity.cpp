@@ -1,25 +1,41 @@
 #include "stdafx.h"
 #include "Entity.h"
 
-Entity::Entity(std::string nameIn) : Spatial(nameIn), relativeTransform(Matrix44f::identity) {}
-Entity::Entity(Vector3f translationIn, Matrix44f rotationIn, Vector3f scaleIn, std::string nameIn) : Spatial(translationIn, rotationIn, scaleIn, nameIn), relativeTransform(Matrix44f::identity) {};
-Entity::Entity(Entity& e) : Spatial(e), relativeTransform(Matrix44f::identity) {};
+Entity::Entity(std::string nameIn) : Spatial(nameIn), relTranslation(0.f,0.f,0.f), relRotation(Matrix44f::identity) {}
+Entity::Entity(Vector3f translationIn, Matrix44f rotationIn, Vector3f scaleIn, std::string nameIn) : Spatial(translationIn, rotationIn, scaleIn, nameIn), relTranslation(0.f, 0.f, 0.f), relRotation(Matrix44f::identity) {};
+Entity::Entity(Entity& e) : Spatial(e), relTranslation(0.f, 0.f, 0.f), relRotation(Matrix44f::identity) {};
 void Entity::render() {
-	Matrix44f rotation = getRotation();
-	float rotMatrix[16] =
+	Matrix44f sRotation = getRotation();
+	float sRotMatrix[16] =
 	{
-		rotation.getEntry(0,0), rotation.getEntry(0,1), rotation.getEntry(0,2), 0.0f,
-		rotation.getEntry(1,0), rotation.getEntry(1,1), rotation.getEntry(1,2), 0.0f,
-		rotation.getEntry(2,0), rotation.getEntry(2,1), rotation.getEntry(2,2), 0.0f,
+		sRotation.getEntry(0,0), sRotation.getEntry(0,1), sRotation.getEntry(0,2), 0.0f,
+		sRotation.getEntry(1,0), sRotation.getEntry(1,1), sRotation.getEntry(1,2), 0.0f,
+		sRotation.getEntry(2,0), sRotation.getEntry(2,1), sRotation.getEntry(2,2), 0.0f,
 		0.0f, 0.0f, 0.0f, 1.0f
 	};
-	Vector3f translation = getTranslation();
-	float transMatrix[16] =
+	Matrix44f eRotation = getRelativeRotation();
+	float eRotMatrix[16] =
+	{
+		eRotation.getEntry(0,0), eRotation.getEntry(0,1), eRotation.getEntry(0,2), 0.0f,
+		eRotation.getEntry(1,0), eRotation.getEntry(1,1), eRotation.getEntry(1,2), 0.0f,
+		eRotation.getEntry(2,0), eRotation.getEntry(2,1), eRotation.getEntry(2,2), 0.0f,
+		0.0f, 0.0f, 0.0f, 1.0f
+	};
+	Vector3f sTranslation = getTranslation();
+	float sTransMatrix[16] =
 	{
 		1.0f, 0.0f, 0.0f, 0.0f,
 		0.0f, 1.0f, 0.0f, 0.0f,
 		0.0f, 0.0f, 1.0f, 0.0f,
-		translation.getEntry(0), translation.getEntry(1), translation.getEntry(2), 1.0f
+		sTranslation.getEntry(0), sTranslation.getEntry(1), sTranslation.getEntry(2), 1.0f
+	};
+	Vector3f eTranslation = getRelativeTranslation();
+	float eTransMatrix[16] =
+	{
+		1.0f, 0.0f, 0.0f, 0.0f,
+		0.0f, 1.0f, 0.0f, 0.0f,
+		0.0f, 0.0f, 1.0f, 0.0f,
+		eTranslation.getEntry(0), eTranslation.getEntry(1), eTranslation.getEntry(2), 1.0f
 	};
 	Vector3f scale = getScale();
 	float scaleMatrix[16] =
@@ -29,27 +45,27 @@ void Entity::render() {
 		0.0f, 0.0f, scale.getEntry(2), 0.0f,
 		0.0f, 0.0f, 0.0f, 1.0f
 	};
-	float relMatrix[16] =
-	{
-		relativeTransform.getEntry(0,0), relativeTransform.getEntry(0,1), relativeTransform.getEntry(0,2), relativeTransform.getEntry(0,3),
-		relativeTransform.getEntry(1,0), relativeTransform.getEntry(1,1), relativeTransform.getEntry(1,2), relativeTransform.getEntry(1,3),
-		relativeTransform.getEntry(2,0), relativeTransform.getEntry(2,1), relativeTransform.getEntry(2,2), relativeTransform.getEntry(2,3),
-		relativeTransform.getEntry(3,0), relativeTransform.getEntry(3,1), relativeTransform.getEntry(3,2), relativeTransform.getEntry(3,3)
-	};
 
 	// set the model-to-world transformation
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
-	glMultMatrixf(transMatrix);
-	glMultMatrixf(rotMatrix);
+	glMultMatrixf(sTransMatrix);
+	glMultMatrixf(sRotMatrix);
 	glMultMatrixf(scaleMatrix);
-	glMultMatrixf(relMatrix);
+	glMultMatrixf(eTransMatrix);
+	glMultMatrixf(eRotMatrix);
 	renderSpecific();
 	glPopMatrix();
 }
-void Entity::setRelativeTransform(Matrix44f matIn) {
-	relativeTransform = matIn;
+void Entity::setRelativeTranslation(Vector3f transIn) {
+	relTranslation = transIn;
 }
-Matrix44f Entity::getRelativeTransform() {
-	return relativeTransform;
+Vector3f Entity::getRelativeTranslation() {
+	return relTranslation;
+}
+void Entity::setRelativeRotation(Matrix44f rotIn) {
+	relRotation = rotIn;
+}
+Matrix44f Entity::getRelativeRotation() {
+	return relRotation;
 }

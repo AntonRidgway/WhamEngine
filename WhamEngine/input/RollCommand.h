@@ -4,6 +4,10 @@
 
 #include "Command.h"
 
+/**
+ * RollCommand is a Command that adds to the roll of any passed-in
+ * Spatial object, by some amount defined in the constructor.
+ */
 class RollCommand : public Command {
 public:
 	RollCommand(float amt);

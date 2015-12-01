@@ -345,13 +345,13 @@ public:
 		return det;
 	}
 
-	Matrix33<Real> invert()
-	{
-		if( determinant() == 0 )
-			return nullptr;
-		//invInit = true;
-		return nullptr;
-	}
+	//Matrix33<Real> invert()
+	//{
+	//	if( determinant() == 0 )
+	//		return nullptr;
+	//	//invInit = true;
+	//	return nullptr;
+	//}
 
 	Real getEntry(int r,int c) const
 	{

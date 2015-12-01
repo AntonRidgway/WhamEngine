@@ -34,12 +34,6 @@
     <Filter Include="Source Files\scene">
       <UniqueIdentifier>{8917afb5-f5a5-48f1-989e-047d8d588682}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\physics">
-      <UniqueIdentifier>{5b9cf859-0b3b-43bc-9376-3452ed8eabf8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\physics">
-      <UniqueIdentifier>{15511f1b-e7e5-4e1e-8144-554516136eb2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\scene\animation">
       <UniqueIdentifier>{4663b8be-9561-4b29-b436-76200a076848}</UniqueIdentifier>
     </Filter>
@@ -95,9 +89,6 @@
     </ClInclude>
     <ClInclude Include="input\InputMan.h">
       <Filter>Header Files\input</Filter>
-    </ClInclude>
-    <ClInclude Include="physics\PhysicsMan.h">
-      <Filter>Header Files\physics</Filter>
     </ClInclude>
     <ClInclude Include="resources\LoadedGeometry.h">
       <Filter>Header Files\resources</Filter>
@@ -210,6 +201,9 @@
     <ClInclude Include="scene\animation\Node.h">
       <Filter>Header Files\scene\animation</Filter>
     </ClInclude>
+    <ClInclude Include="PhysicsMan.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -223,9 +217,6 @@
     </ClCompile>
     <ClCompile Include="input\InputMan.cpp">
       <Filter>Source Files\input</Filter>
-    </ClCompile>
-    <ClCompile Include="physics\PhysicsMan.cpp">
-      <Filter>Source Files\physics</Filter>
     </ClCompile>
     <ClCompile Include="resources\LoadedGeometry.cpp">
       <Filter>Source Files\resources</Filter>
@@ -328,6 +319,9 @@
     </ClCompile>
     <ClCompile Include="scene\animation\Node.cpp">
       <Filter>Source Files\scene\animation</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsMan.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

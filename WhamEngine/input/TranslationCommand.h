@@ -5,6 +5,11 @@
 #include "Command.h"
 #include "math\Vector.h"
 
+/**
+ * TranslationCommand is a Command that adds some vector to a
+ * passed-in Spatial's current translation. The vector is defined
+ * in the constructor.
+ */
 class TranslationCommand : public Command {
 public:
 	TranslationCommand(Vector3f transVector);

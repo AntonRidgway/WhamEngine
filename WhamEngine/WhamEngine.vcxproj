@@ -176,7 +176,7 @@ xcopy /y "$(SolutionDir)assets\*.*" "$(OutDir)"</Command>
     <ClInclude Include="math\Matrix.h" />
     <ClInclude Include="math\Quaternion.h" />
     <ClInclude Include="math\Vector.h" />
-    <ClInclude Include="physics\PhysicsMan.h" />
+    <ClInclude Include="PhysicsMan.h" />
     <ClInclude Include="RenderMan.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="resources\DblStackAllocator.h" />
@@ -221,7 +221,7 @@ xcopy /y "$(SolutionDir)assets\*.*" "$(OutDir)"</Command>
     <ClCompile Include="input\TranslationCommand.cpp" />
     <ClCompile Include="input\UpCommand.cpp" />
     <ClCompile Include="input\YawCommand.cpp" />
-    <ClCompile Include="physics\PhysicsMan.cpp" />
+    <ClCompile Include="PhysicsMan.cpp" />
     <ClCompile Include="RenderMan.cpp" />
     <ClCompile Include="resources\LoadedGeometry.cpp" />
     <ClCompile Include="resources\Material.cpp" />

@@ -7,7 +7,7 @@
 #include "Clock.h"
 #include "input/Command.h"
 #include "input/InputMan.h"
-#include "physics/PhysicsMan.h"
+#include "PhysicsMan.h"
 #include "scene/Scene.h"
 
 class StateMan
